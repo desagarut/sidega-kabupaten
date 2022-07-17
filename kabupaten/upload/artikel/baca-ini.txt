@@ -1,0 +1,5 @@
+*******************************
+Folder: kabupaten/upload/galeri
+*******************************
+
+Folder ini tempat menyimpan semua gambar yang diunggah sebagai foto galeri.

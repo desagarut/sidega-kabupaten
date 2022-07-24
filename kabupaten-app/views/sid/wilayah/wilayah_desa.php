@@ -14,7 +14,7 @@
 				<div class="box box-info">
 					<div class="box-header with-border">
 						<?php if ($this->CI->cek_hak_akses('h')) : ?>
-							<a href="<?= site_url("sid_core/form_desa/$id_desa") ?>" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Data"><i class="fa fa-plus"></i> Tambah Desa/Kelurahan</a>
+							<a href="<?= site_url("sid_core/form_desa/$id_kecamatan/$id_desa") ?>" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Tambah Data"><i class="fa fa-plus"></i> Tambah Desa/Kelurahan</a>
 						<?php endif; ?>
 						<a href="<?= site_url("sid_core/cetak_desa/$id_desa") ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak Data" target="_blank"><i class="fa fa-print "></i> Cetak</a>
 						<a href="<?= site_url("sid_core/excel_desa/$id_desa") ?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh Data" target="_blank"><i class="fa fa-download"></i> Unduh</a>

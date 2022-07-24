@@ -13,7 +13,7 @@
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<a href="<?= site_url("sid_core/sub_desa/$id_desa") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Desa">
+						<a href="<?= site_url("sid_core/sub_desa/$id_kecamatan/$id_desa") ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar Desa">
 							<i class="fa fa-arrow-circle-left "></i>Kembali ke Daftar Desa
 						</a>
 					</div>
@@ -23,6 +23,15 @@
 								<form id="validasi" action="<?= $form_action ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 									<div class="box-body">
 										<div class="row">
+											<div class="col-sm-12">
+												<div class="form-group">
+													<label class="col-sm-3 control-label" for="kecamatan">Nama Kecamatan</label>
+													<div class="col-sm-7">
+														<input id="kecamatan" class="form-control input-sm nama_terbatas" disabled maxlength="100" type="text" placeholder="Nama kecamatan" name="kecamatan" value="<?= $kecamatan ?>">
+													</div>
+												</div>
+											</div>
+
 											<div class="col-sm-12">
 												<div class="form-group">
 													<label class="col-sm-3 control-label" for="desa">Nama Desa</label>

@@ -126,8 +126,6 @@ class Sid_Core extends Admin_Controller {
 		redirect($kembali);
 	}
 
-
-
 //SUB DESA
 public function sub_desa($id_kecamatan = '')
 {
@@ -142,19 +140,48 @@ public function sub_desa($id_kecamatan = '')
 	$this->render('sid/wilayah/wilayah_desa', $data);
 }
 
-public function form_desa($id_kecamatan = '', $id_desa = '')
+public function cetak_desa($id_kecamatan = '')
+{
+	$kecamatan = $this->wilayah_model->cluster_by_id($id_kecamatan);
+	$nama_kecamatan = $kecamatan['kecamatan'];
+	$data['dusun'] = $kecamatan['kecamatan'];
+	$data['id_kecamatan'] = $id_kecamatan;
+	$data['main'] = $this->wilayah_model->list_data_desa($id_kecamatan );
+	$data['total'] = $this->wilayah_model->total_desa($nama_kecamatan );
+
+	$this->load->view('sid/wilayah/wilayah_desa_print', $data);
+}
+
+public function excel_desa($id_kecamatan = '', $id_desa = '')
 {
 	$temp = $this->wilayah_model->cluster_by_id($id_kecamatan);
 	$kecamatan = $temp['kecamatan'];
 	$data['kecamatan'] = $temp['kecamatan'];
 	$data['id_kecamatan'] = $id_kecamatan;
 
+	$temp = $this->wilayah_model->cluster_by_id($id_desa);
+	$desa = $temp['desa'];
+	$data['desa'] = $desa;
+	$data['main'] = $this->wilayah_model->list_data_desa($kecamatan, $desa);
+	$data['total'] = $this->wilayah_model->total_desa($kecamatan, $desa);
+
+	$this->load->view('sid/wilayah/wilayah_desa_excel', $data);
+}
+
+
+public function form_desa($id_kecamatan = '', $id_desa = '')
+{
+	$temp = $this->wilayah_model->cluster_by_id($id_kecamatan);
+	$kecamatan = $temp['kecamatan'];
+	$data['kecamatan'] = $temp['kecamatan'];
+	$data['id_kecamatan'] = $id_kecamatan;
+	$data['id_desa'] = $id_desa;
+
 	$data['penduduk'] = $this->wilayah_model->list_penduduk();
 
 	if ($id_desa)
 	{
 		$temp = $this->wilayah_model->cluster_by_id($id_desa);
-		$data['id_desa'] = $id_desa;
 		$data['desa'] = $temp['desa'];
 		$data['individu'] = $this->wilayah_model->get_penduduk($temp['id_kepala']);
 		$data['form_action'] = site_url("sid_core/update_desa/$id_kecamatan/$id_desa");
@@ -162,11 +189,10 @@ public function form_desa($id_kecamatan = '', $id_desa = '')
 	else
 	{
 		$data['desa'] = NULL;
-		$data['kecamatan'] = $temp['kecamatan'];
 		$data['form_action'] = site_url("sid_core/insert_desa/$id_kecamatan");
 	}
 
-	$this->render('sid/wilayah/wilayah_form_desa', $data);
+	$this->render('sid/wilayah/wilayah_desa_form', $data);
 }
 
 public function insert_desa($kecamatan = '')
@@ -229,8 +255,8 @@ public function form_dusun($id_kecamatan = '', $id_desa = '', $id_dusun = '')
 	$temp = $this->wilayah_model->cluster_by_id($id_kecamatan);
 	$kecamatan = $temp['kecamatan'];
 	$data['kecamatan'] = $temp['kecamatan'];
+	
 	$data['id_kecamatan'] = $id_kecamatan;
-
 	$data['desa'] = $temp['desa'];
 	$data['id_desa'] = $id_desa;
 

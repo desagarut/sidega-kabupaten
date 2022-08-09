@@ -6,9 +6,9 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Address</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><?= $desa['alamat_kantor_kecamatan']; ?></p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><?= $desa['telepon_kecamatan']; ?></p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><?= $desa['email_kecamatan']; ?></p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i><?= $kabupaten['alamat_kantor_kecamatan']; ?></p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i><?= $kabupaten['telepon_kecamatan']; ?></p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i><?= $kabupaten['email_kecamatan']; ?></p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-secondary rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-square btn-outline-secondary rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -22,7 +22,7 @@
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Our Services</a>
                     <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
+                    <a class="btn btn-link" href="https://help.desagarut.id">Support</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Gallery</h5>

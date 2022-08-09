@@ -11,8 +11,8 @@ $desa = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE rt 
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h6 class="section-title bg-white text-center text-danger px-3">Statistik</h6>
-                <h1 class="display-6 mb-4"> <?=ucwords($this->setting->sebutan_kecamatan)?> <?=ucwords($this->setting->nama_kecamatan)?></h1>
+                <h6 class="section-title bg-white text-center text-danger px-3">Demografi</h6>
+                <h1 class="display-6 mb-4"> <?=ucwords($this->setting->sebutan_kabupaten)?> Garut</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">

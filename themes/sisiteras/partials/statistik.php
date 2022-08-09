@@ -4,10 +4,6 @@ $keluarga = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_keluarga')->r
 $rtm = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_rtm')->result_array()[0]['jumlah'];
 $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_array()[0]['jumlah'];
 $desa = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE rt = "-"')->result_array()[0]['jumlah'];
-$prioritas_kecamatan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tbl_perencanaan_desa WHERE status_penetapan_musrenbang_kecamatan = 1')->result_array()[0]['jumlah'];
-$rkpdesa = $this->db->query('SELECT COUNT(id) AS jumlah FROM tbl_perencanaan_desa WHERE status_rkpdes = 1')->result_array()[0]['jumlah'];
-$durkpdesa = $this->db->query('SELECT COUNT(id) AS jumlah FROM tbl_perencanaan_desa WHERE status_usulan_musrenbang_kecamatan = 1')->result_array()[0]['jumlah'];
-$skpd_penanggungjawab = $this->db->query('SELECT COUNT(DISTINCT bidang_desa) FROM tbl_perencanaan_desa')->result_array()[0]['jumlah'];
 
 ?>
 

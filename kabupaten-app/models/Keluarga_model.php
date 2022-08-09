@@ -86,7 +86,7 @@
 	{
 		$sql = "FROM tweb_keluarga u
 			LEFT JOIN tweb_penduduk t ON u.nik_kepala = t.id
-			LEFT JOIN tweb_wil_cluster c ON u.id_cluster = c.id";
+			LEFT JOIN tweb_wilayah c ON u.id_cluster = c.id";
 
 		$sql .= " WHERE 1 ";
 		$sql .=	$this->search_sql();
@@ -520,7 +520,7 @@
 	{
 		$sql = "SELECT k.*, b.dusun as dusun, b.rw as rw
 			FROM tweb_keluarga k
-			LEFT JOIN tweb_wil_cluster b ON k.id_cluster = b.id
+			LEFT JOIN tweb_wilayah b ON k.id_cluster = b.id
 			WHERE k.id = ?";
 		$query = $this->db->query($sql, $id);
 		$data  = $query->row_array();
@@ -570,7 +570,7 @@
 	{
 		$sql = "SELECT u.id, u.nik, u.nama, u.alamat_sekarang as alamat, w.rt, w.rw, w.dusun
 			FROM tweb_penduduk u
-			LEFT JOIN tweb_wil_cluster w ON u.id_cluster = w.id
+			LEFT JOIN tweb_wilayah w ON u.id_cluster = w.id
 			WHERE (status = 1 ) AND id_kk = 0";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
@@ -602,7 +602,7 @@
 			LEFT JOIN tweb_penduduk_kawin w ON u.status_kawin = w.id
 			LEFT JOIN tweb_penduduk_sex x ON u.sex = x.id
 			LEFT JOIN tweb_penduduk_hubungan h ON u.kk_level = h.id
-			LEFT JOIN tweb_wil_cluster b ON u.id_cluster = b.id
+			LEFT JOIN tweb_wilayah b ON u.id_cluster = b.id
 			LEFT JOIN tweb_keluarga k ON u.id_kk = k.id
 			WHERE status = 1 AND status_dasar = 1 AND id_kk = ?";
 		if ($options['dengan_kk'] !== NULL AND !$options['dengan_kk']) $sql .= " AND kk_level <> 1";
@@ -655,7 +655,7 @@
 			->join('tweb_penduduk_kawin w', 'u.status_kawin = w.id', 'left')
 			->join('tweb_penduduk_sex x', 'u.sex = x.id', 'left')
 			->join('tweb_penduduk_hubungan h', 'u.kk_level = h.id', 'left')
-			->join('tweb_wil_cluster c', '('.$id_cluster.') = c.id', 'left')
+			->join('tweb_wilayah c', '('.$id_cluster.') = c.id', 'left')
 			->where('u.id = ('.$nik_kepala.')');
 
 			$data = $this->db->get()->row_array();
@@ -672,7 +672,7 @@
 		$sql = "SELECT u.*, c.*, k.no_kk, k.alamat
 			FROM tweb_penduduk u
 			LEFT JOIN tweb_keluarga k ON k.id = ?
-			LEFT JOIN tweb_wil_cluster c ON u.id_cluster = c.id WHERE u.id = (SELECT nik_kepala FROM tweb_keluarga WHERE id = ?) ";
+			LEFT JOIN tweb_wilayah c ON u.id_cluster = c.id WHERE u.id = (SELECT nik_kepala FROM tweb_keluarga WHERE id = ?) ";
 		$query = $this->db->query($sql,array($id,$id));
 
 		return $query->row_array();
@@ -827,7 +827,7 @@
 	{
 		$sql = "SELECT a.dusun, a.rw, a.rt, k.alamat
 				FROM tweb_keluarga k
-				LEFT JOIN tweb_wil_cluster a ON k.id_cluster = a.id
+				LEFT JOIN tweb_wilayah a ON k.id_cluster = a.id
 				WHERE k.id = ?";
 		$query = $this->db->query($sql, $id_kk);
 		$data  = $query->row_array();

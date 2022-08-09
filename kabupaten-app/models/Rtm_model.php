@@ -223,7 +223,7 @@ class Rtm_model extends CI_Model {
 			LEFT JOIN tweb_penduduk_sex x ON u.sex = x.id
 			LEFT JOIN tweb_rtm_hubungan h ON u.rtm_level = h.id
 			LEFT JOIN tweb_rtm r ON u.id_rtm = r.no_kk
-			LEFT JOIN tweb_wil_cluster b ON u.id_cluster = b.id
+			LEFT JOIN tweb_wilayah b ON u.id_cluster = b.id
 			WHERE r.id = ? ORDER BY rtm_level";
 
 		$query = $this->db->query($sql, array($id));
@@ -252,7 +252,7 @@ class Rtm_model extends CI_Model {
 			LEFT JOIN tweb_penduduk_pendidikan_kk d ON u.pendidikan_kk_id = d.id
 			LEFT JOIN tweb_penduduk_warganegara f ON u.warganegara_id = f.id
 			LEFT JOIN tweb_penduduk_agama a ON u.agama_id = a.id
-			LEFT JOIN tweb_wil_cluster wil ON wil.id = u.id_cluster
+			LEFT JOIN tweb_wilayah wil ON wil.id = u.id_cluster
 			WHERE r.$kolom_id = $id LIMIT 1";
 		$query = $this->db->query($sql);
 		$data = $query->row_array();
@@ -355,7 +355,7 @@ class Rtm_model extends CI_Model {
 			->from('tweb_rtm u')
 			->join('tweb_penduduk t', 'u.no_kk = t.id_rtm AND t.rtm_level = 1', 'LEFT')
 			->join('tweb_keluarga k', 't.id_kk = k.id', 'LEFT')
-			->join('tweb_wil_cluster c', 't.id_cluster = c.id', 'LEFT');
+			->join('tweb_wilayah c', 't.id_cluster = c.id', 'LEFT');
 
 		$this->search_sql();
 

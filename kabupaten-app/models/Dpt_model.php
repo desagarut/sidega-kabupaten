@@ -125,8 +125,8 @@
 		$sql = "
 		FROM tweb_penduduk u
 		LEFT JOIN tweb_keluarga d ON u.id_kk = d.id
-		LEFT JOIN tweb_wil_cluster a ON d.id_cluster = a.id
-		LEFT JOIN tweb_wil_cluster a2 ON u.id_cluster = a2.id
+		LEFT JOIN tweb_wilayah a ON d.id_cluster = a.id
+		LEFT JOIN tweb_wilayah a2 ON u.id_cluster = a2.id
 		LEFT JOIN tweb_penduduk_pendidikan_kk n ON u.pendidikan_kk_id = n.id
 		LEFT JOIN tweb_penduduk_pendidikan sd ON u.pendidikan_sedang_id = sd.id
 		LEFT JOIN tweb_penduduk_pekerjaan p ON u.pekerjaan_id = p.id
@@ -226,7 +226,7 @@
 				// Ambil alamat penduduk
 				$sql = "SELECT p.id_cluster, p.alamat_sekarang, c.dusun, c.rw, c.rt
 					FROM tweb_penduduk p
-					LEFT JOIN tweb_wil_cluster c on p.id_cluster = c.id
+					LEFT JOIN tweb_wilayah c on p.id_cluster = c.id
 					WHERE p.id = ?
 					";
 				$query = $this->db->query($sql, $data[$i]['id']);
@@ -275,7 +275,7 @@
       sum(case when sex = 1 then 1 else 0 end) jumlah_warga_l,
       sum(case when sex = 2 then 1 else 0 end) jumlah_warga_p
 			FROM tweb_penduduk u
-			LEFT JOIN tweb_wil_cluster w ON u.id_cluster = w.id
+			LEFT JOIN tweb_wilayah w ON u.id_cluster = w.id
 			WHERE 1 ";
 		$sql .= $this->syarat_dpt_sql();
 		$sql .= " GROUP BY dusun,rw";

@@ -284,7 +284,7 @@ class Kelompok_model extends MY_Model {
 			LEFT JOIN tweb_penduduk_warganegara f ON u.warganegara_id = f.id
 			LEFT JOIN tweb_penduduk_agama a ON u.agama_id = a.id
 			LEFT JOIN tweb_penduduk_sex s ON s.id = u.sex
-			LEFT JOIN tweb_wil_cluster wil ON wil.id = u.id_cluster
+			LEFT JOIN tweb_wilayah wil ON wil.id = u.id_cluster
 			WHERE k.id = $id LIMIT 1";
 		$query = $this->db->query($sql);
 		$data = $query->row_array();
@@ -343,9 +343,9 @@ class Kelompok_model extends MY_Model {
 						end
 				end) AS alamat")
 			->from('penduduk_hidup p')
-			->join('tweb_wil_cluster cp', 'p.id_cluster = cp.id', 'left')
+			->join('tweb_wilayah cp', 'p.id_cluster = cp.id', 'left')
 			->join('tweb_keluarga k', 'p.id_kk = k.id', 'left')
-			->join('tweb_wil_cluster ck', 'k.id_cluster = ck.id', 'left');
+			->join('tweb_wilayah ck', 'k.id_cluster = ck.id', 'left');
 		$data = $this->db->get()->result_array();
 		return $data;
 	}
@@ -369,7 +369,7 @@ class Kelompok_model extends MY_Model {
 			->from('kelompok_anggota ka')
 			->join('tweb_penduduk tp', 'ka.id_penduduk = tp.id', 'left')
 			->join('tweb_penduduk_sex tpx', 'tp.sex = tpx.id', 'left')
-			->join('tweb_wil_cluster a', 'tp.id_cluster = a.id', 'left')
+			->join('tweb_wilayah a', 'tp.id_cluster = a.id', 'left')
 			->where('ka.id_kelompok', $id_kelompok)
 			->order_by('CAST(jabatan AS UNSIGNED), CAST(no_anggota AS UNSIGNED)')
 			->get()

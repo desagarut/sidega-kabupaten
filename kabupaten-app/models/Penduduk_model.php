@@ -211,7 +211,7 @@ class Penduduk_model extends MY_Model {
 		// Alamat penduduk lepas diambil dari kolom alamat_sekarang
 		$sql = "SELECT a.dusun, a.rw, a.rt, u.alamat_sekarang as alamat
 				FROM tweb_penduduk u
-				LEFT JOIN tweb_wil_cluster a ON u.id_cluster = a.id
+				LEFT JOIN tweb_wilayah a ON u.id_cluster = a.id
 				WHERE u.id = ?";
 		$query = $this->db->query($sql,$id);
 		$data = $query->row_array();
@@ -244,8 +244,8 @@ class Penduduk_model extends MY_Model {
 		FROM tweb_penduduk u
 		LEFT JOIN tweb_keluarga d ON u.id_kk = d.id
 		LEFT JOIN tweb_rtm b ON u.id_rtm = b.no_kk
-		LEFT JOIN tweb_wil_cluster a ON d.id_cluster = a.id
-		LEFT JOIN tweb_wil_cluster a2 ON u.id_cluster = a2.id
+		LEFT JOIN tweb_wilayah a ON d.id_cluster = a.id
+		LEFT JOIN tweb_wilayah a2 ON u.id_cluster = a2.id
 		LEFT JOIN tweb_penduduk_pendidikan_kk n ON u.pendidikan_kk_id = n.id
 		LEFT JOIN tweb_penduduk_pendidikan sd ON u.pendidikan_sedang_id = sd.id
 		LEFT JOIN tweb_penduduk_pekerjaan p ON u.pekerjaan_id = p.id
@@ -389,7 +389,7 @@ class Penduduk_model extends MY_Model {
 				// Ambil alamat penduduk
 				$sql = "SELECT p.id_cluster, p.alamat_sekarang, c.dusun, c.rw, c.rt
 					FROM tweb_penduduk p
-					LEFT JOIN tweb_wil_cluster c on p.id_cluster = c.id
+					LEFT JOIN tweb_wilayah c on p.id_cluster = c.id
 					WHERE p.id = ?
 					";
 				$query = $this->db->query($sql, $data[$i]['id']);
@@ -432,8 +432,8 @@ class Penduduk_model extends MY_Model {
 					else 'Alamat penduduk belum valid'
 				end as alamat
 				FROM tweb_penduduk u
-				LEFT JOIN tweb_wil_cluster a ON u.id_cluster = a.id
-				LEFT JOIN tweb_wil_cluster a2 ON u.id_cluster = a2.id
+				LEFT JOIN tweb_wilayah a ON u.id_cluster = a.id
+				LEFT JOIN tweb_wilayah a2 ON u.id_cluster = a2.id
 				LEFT JOIN tweb_keluarga d ON u.id_kk = d.id
 				LEFT JOIN tweb_penduduk_pendidikan_kk n ON u.pendidikan_kk_id = n.id
 				LEFT JOIN tweb_penduduk_pendidikan sd ON u.pendidikan_sedang_id = sd.id
@@ -970,7 +970,7 @@ class Penduduk_model extends MY_Model {
 			log.no_kk as log_no_kk
 		 FROM tweb_penduduk u
 			LEFT JOIN tweb_keluarga d ON u.id_kk = d.id
-			LEFT JOIN tweb_wil_cluster a ON u.id_cluster = a.id
+			LEFT JOIN tweb_wilayah a ON u.id_cluster = a.id
 			LEFT JOIN tweb_penduduk_pendidikan o ON u.pendidikan_sedang_id = o.id
 			LEFT JOIN tweb_penduduk_pendidikan_kk b ON u.pendidikan_kk_id = b.id
 			LEFT JOIN tweb_penduduk_warganegara w ON u.warganegara_id = w.id
@@ -1001,7 +1001,7 @@ class Penduduk_model extends MY_Model {
 		{
 			$data['alamat'] = $data['alamat_sekarang'];
 			$this->db->where('id', $data['id_cluster']);
-			$query = $this->db->get('tweb_wil_cluster');
+			$query = $this->db->get('tweb_wilayah');
 			$cluster = $query->row_array();
 			$data['dusun'] = $cluster['dusun'];
 			$data['rw'] = $cluster['rw'];
@@ -1037,7 +1037,7 @@ class Penduduk_model extends MY_Model {
 		left join tweb_penduduk_hubungan h on u.kk_level = h.id
 		left join tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
 		left join tweb_penduduk_pekerjaan j on u.pekerjaan_id = j.id
-		left join tweb_wil_cluster c on u.id_cluster = c.id
+		left join tweb_wilayah c on u.id_cluster = c.id
 		left join tweb_keluarga k on u.id_kk = k.id
 		left join tweb_penduduk_warganegara f on u.warganegara_id = f.id
 		WHERE u.nik = ?";
@@ -1050,7 +1050,7 @@ class Penduduk_model extends MY_Model {
 	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan wilayah di wilayah_model.php
 	public function list_dusun()
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rt = '0' AND rw = '0' ";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rt = '0' AND rw = '0' ";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;
@@ -1059,7 +1059,7 @@ class Penduduk_model extends MY_Model {
 	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan wilayah di wilayah_model.php
 	public function list_wil()
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE zoom > '0'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE zoom > '0'";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;
@@ -1072,7 +1072,7 @@ class Penduduk_model extends MY_Model {
 			where('rt', '0')->
 			where('dusun', $dusun)->
 			where("rw <> '0'")->
-			get('tweb_wil_cluster')->
+			get('tweb_wilayah')->
 			result_array();
 		return $data;
 	}
@@ -1080,7 +1080,7 @@ class Penduduk_model extends MY_Model {
 	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan wilayah di wilayah_model.php
 	public function list_rw_all()
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rt = '0' AND rw <> '0'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rt = '0' AND rw <> '0'";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;
@@ -1089,7 +1089,7 @@ class Penduduk_model extends MY_Model {
 	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan wilayah di wilayah_model.php
 	public function list_rt($dusun='', $rw='')
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rw = ? AND dusun = ? AND rt <> '0'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rw = ? AND dusun = ? AND rt <> '0'";
 		$query = $this->db->query($sql,array($rw,$dusun));
 		$data = $query->result_array();
 		return $data;
@@ -1098,7 +1098,7 @@ class Penduduk_model extends MY_Model {
 	// TODO: Ubah yg masih menggunakan, spy menggunakan penanganan wilayah di wilayah_model.php
 	public function list_rt_all()
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rt <> '0' AND rw <> '-'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rt <> '0' AND rw <> '-'";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;
@@ -1359,14 +1359,14 @@ class Penduduk_model extends MY_Model {
 		$sql = "SELECT u.id, nik, nama,
 			CONCAT('Alamat : RT-', w.rt, ', RW-', w.rw, '', w.dusun) AS alamat,
 			CONCAT('NIK: ', nik, ' - ', nama, '\nAlamat : RT-', w.rt, ', RW-', w.rw, '', w.dusun) AS info_pilihan_penduduk,
-			w.rt, w.rw, w.dusun, u.sex FROM tweb_penduduk u LEFT JOIN tweb_wil_cluster w ON u.id_cluster = w.id WHERE u.status_dasar = ?";
+			w.rt, w.rw, w.dusun, u.sex FROM tweb_penduduk u LEFT JOIN tweb_wilayah w ON u.id_cluster = w.id WHERE u.status_dasar = ?";
 		$data = $this->db->query($sql, array($status_dasar))->result_array();
 		return $data;
 	}
 
 	public function get_cluster($id_cluster=0)
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE id = $id_cluster ";
+		$sql = "SELECT * FROM tweb_wilayah WHERE id = $id_cluster ";
 		$query = $this->db->query($sql);
 		return $query->row_array();
 	}

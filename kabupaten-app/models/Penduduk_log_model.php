@@ -166,7 +166,7 @@
 		$this->db
 			->from('tweb_penduduk u')
 			->join('tweb_keluarga d', 'u.id_kk = d.id', 'left')
-			->join('tweb_wil_cluster a', 'd.id_cluster = a.id', 'left')
+			->join('tweb_wilayah a', 'd.id_cluster = a.id', 'left')
 			->join('tweb_penduduk_sex x', 'u.sex = x.id', 'left')
 			->join('tweb_penduduk_agama g', 'u.agama_id = g.id', 'left')
 			->join('tweb_status_dasar sd', 'u.status_dasar = sd.id', 'left')
@@ -226,7 +226,7 @@
 				// Ambil alamat penduduk
 				$query = $this->db->select('p.id_cluster, p.alamat_sekarang, c.dusun, c.rw, c.rt')
 					->from('tweb_penduduk p')
-					->join('tweb_wil_cluster c', 'p.id_cluster = c.id', 'left')
+					->join('tweb_wilayah c', 'p.id_cluster = c.id', 'left')
 					->where('p.id', $data[$i]['id']);
 				$penduduk = $query->get()->row_array();
 				$data[$i]['alamat'] = $penduduk['alamat_sekarang'];

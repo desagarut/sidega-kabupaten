@@ -216,7 +216,7 @@
 		])
 		->from('tbl_wisata p')
 		->where('p.status = 1')
-		->join('tweb_wil_cluster w', 'p.id_lokasi = w.id', 'left')
+		->join('tweb_wilayah w', 'p.id_lokasi = w.id', 'left')
 		->get()
 		->result();
 

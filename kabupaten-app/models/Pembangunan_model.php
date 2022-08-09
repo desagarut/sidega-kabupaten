@@ -32,7 +32,7 @@ class Pembangunan_model extends CI_Model
 		])
 		->from("{$this->table} p")
 		->join('pembangunan_ref_dokumentasi d', 'd.id_pembangunan = p.id', 'left')
-		->join('tweb_wil_cluster w', 'p.id_lokasi = w.id', 'left')
+		->join('tweb_wilayah w', 'p.id_lokasi = w.id', 'left')
 		->group_by('p.id');
 
 		if (empty($search))
@@ -72,7 +72,7 @@ class Pembangunan_model extends CI_Model
 		])
 		->from('pembangunan p')
 		->where('p.status = 1')
-		->join('tweb_wil_cluster w', 'p.id_lokasi = w.id', 'left')
+		->join('tweb_wilayah w', 'p.id_lokasi = w.id', 'left')
 		->get()
 		->result();
 
@@ -211,7 +211,7 @@ class Pembangunan_model extends CI_Model
 			) ELSE p.lokasi END) AS alamat",
 		])
 		->from("{$this->table} p")
-		->join('tweb_wil_cluster w', 'p.id_lokasi = w.id', 'left')
+		->join('tweb_wilayah w', 'p.id_lokasi = w.id', 'left')
 		->where('p.id', $id)
 		->get()
 		->row();

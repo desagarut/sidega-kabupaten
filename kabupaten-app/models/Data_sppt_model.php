@@ -87,7 +87,7 @@ class Data_sppt_model extends CI_Model {
 		$this->db->from('tbl_data_sppt c')
 			->join('tbl_sppt_penduduk cu', 'cu.id_sppt = c.id', 'left')
 			->join('tweb_penduduk u', 'u.id = cu.id_pend', 'left')
-			->join('tweb_wil_cluster w', 'w.id = u.id_cluster', 'left');
+			->join('tweb_wilayah w', 'w.id = u.id_cluster', 'left');
 		$this->search_sql();
 	}
 
@@ -146,7 +146,7 @@ class Data_sppt_model extends CI_Model {
 			->from('tbl_data_sppt c')
 			->join('tbl_sppt_penduduk cu', 'cu.id_sppt = c.id', 'left')
 			->join('tweb_penduduk u', 'u.id = cu.id_pend', 'left')
-			->join('tweb_wil_cluster w', 'w.id = u.id_cluster', 'left')
+			->join('tweb_wilayah w', 'w.id = u.id_cluster', 'left')
 			->limit(1)
 			->get()
 			->row_array();
@@ -698,7 +698,7 @@ class Data_sppt_model extends CI_Model {
 			->join('tbl_sppt_penduduk cp', 'c.id = cp.id_sppt', 'left')
 			->join('tweb_penduduk p', 'p.id = cp.id_pend', 'left')
 			->join('tweb_keluarga k','k.id = p.id_kk', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_cluster', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_cluster', 'left')
 			->where('c.id', $id_sppt);
 		$data = $this->db->get()->row_array();
 
@@ -742,7 +742,7 @@ class Data_sppt_model extends CI_Model {
 		$this->db->select('p.id, p.nik,p.nama,k.no_kk,w.rt,w.rw,w.dusun')
 			->from('tweb_penduduk p')
 			->join('tweb_keluarga k','k.id = p.id_kk', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_cluster', 'left');
+			->join('tweb_wilayah w', 'w.id = p.id_cluster', 'left');
 		if ($nik)
 			$this->db->where('p.nik', $id);
 		else
@@ -756,7 +756,7 @@ class Data_sppt_model extends CI_Model {
 	{
 		$strSQL = "SELECT p.nik,p.nama,k.no_kk,w.rt,w.rw,w.dusun FROM tweb_penduduk p
 			LEFT JOIN tweb_keluarga k ON k.id = p.id_kk
-			LEFT JOIN tweb_wil_cluster w ON w.id = p.id_cluster
+			LEFT JOIN tweb_wilayah w ON w.id = p.id_cluster
 			WHERE 1 ORDER BY nama";
 		$query = $this->db->query($strSQL);
 		$data = "";

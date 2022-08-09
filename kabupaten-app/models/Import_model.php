@@ -257,38 +257,38 @@ class Import_model extends CI_Model {
 
 	protected function tulis_tweb_wil_clusterdesa(&$isi_baris)
 	{
-		// Masukkan wilayah administratif ke tabel tweb_wil_cluster apabila
+		// Masukkan wilayah administratif ke tabel tweb_wilayah apabila
 		// wilayah administratif ini belum ada
 
 		// --- Masukkan dusun apabila belum ada
-		$query = "SELECT id FROM tweb_wil_cluster WHERE dusun = ?";
+		$query = "SELECT id FROM tweb_wilayah WHERE dusun = ?";
 		$hasil = $this->db->query($query, $isi_baris['dusun']);
 		$res = $hasil->row_array();
 		if (empty($res))
 		{
-			$query = "INSERT INTO tweb_wil_cluster(rt, rw, dusun) VALUES (0, 0, '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(rt, rw, dusun) VALUES (0, 0, '".$isi_baris['dusun']."')";
 			$hasil = $this->db->query($query);
-			$query = "INSERT INTO tweb_wil_cluster(rt, rw, dusun) VALUES (0, '-', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(rt, rw, dusun) VALUES (0, '-', '".$isi_baris['dusun']."')";
 			$hasil = $this->db->query($query);
-			$query = "INSERT INTO tweb_wil_cluster(rt, rw, dusun) VALUES ('-','-','".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(rt, rw, dusun) VALUES ('-','-','".$isi_baris['dusun']."')";
 			$hasil = $this->db->query($query);
 		}
 
 		// --- Masukkan rw apabila belum ada
-		$query = "SELECT id FROM tweb_wil_cluster WHERE dusun = ? AND rw = ?";
+		$query = "SELECT id FROM tweb_wilayah WHERE dusun = ? AND rw = ?";
 		$hasil = $this->db->query($query, array($isi_baris['dusun'], $isi_baris['rw']));
 		$res = $hasil->row_array();
 		if (empty($res))
 		{
-			$query = "INSERT INTO tweb_wil_cluster(rt,rw,dusun) VALUES (0, '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(rt,rw,dusun) VALUES (0, '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
 			$hasil = $this->db->query($query);
-			$query = "INSERT INTO tweb_wil_cluster(rt,rw,dusun) VALUES ('-', '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(rt,rw,dusun) VALUES ('-', '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
 			$hasil = $this->db->query($query);
 			$isi_baris['id_cluster'] = $this->db->insert_id();
 		}
 
 		// --- Masukkan rt apabila belum ada
-		$query = "SELECT id FROM tweb_wil_cluster WHERE
+		$query = "SELECT id FROM tweb_wilayah WHERE
 							dusun = '".$isi_baris['dusun']."' AND rw='".$isi_baris['rw']."' AND rt='".$isi_baris['rt']."'";
 		$hasil = $this->db->query($query);
 		$res = $hasil->row_array();
@@ -298,7 +298,7 @@ class Import_model extends CI_Model {
 		}
 		else
 		{
-			$query = "INSERT INTO tweb_wil_cluster(rt,rw,dusun) VALUES ('".$isi_baris['rt']."', '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(rt,rw,dusun) VALUES ('".$isi_baris['rt']."', '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
 			$hasil = $this->db->query($query);
 			$isi_baris['id_cluster'] = $this->db->insert_id();
 		}
@@ -412,7 +412,7 @@ class Import_model extends CI_Model {
 
 	private function hapus_data_penduduk()
 	{
-		$tabel_penduduk = array('tweb_wil_cluster', 'tweb_keluarga', 'tweb_penduduk', 'log_bulanan', 'log_keluarga', 'log_penduduk', 'log_perubahan_penduduk', 'log_surat', 'tweb_rtm');
+		$tabel_penduduk = array('tweb_wilayah', 'tweb_keluarga', 'tweb_penduduk', 'log_bulanan', 'log_keluarga', 'log_penduduk', 'log_perubahan_penduduk', 'log_surat', 'tweb_rtm');
 		foreach ($tabel_penduduk as $tabel)
 		{
 			$this->db->empty_table($tabel);

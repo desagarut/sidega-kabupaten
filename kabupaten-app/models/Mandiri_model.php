@@ -155,7 +155,7 @@ class Mandiri_model extends CI_Model {
 			->select('u.*, n.nama AS nama, n.nik AS nik')
 			->from('tweb_penduduk_mandiri u')
 			->join('penduduk_hidup n', 'u.id_pend = n.id', 'left')
-			->join('tweb_wil_cluster w', 'n.id_cluster = w.id', 'left');
+			->join('tweb_wilayah w', 'n.id_cluster = w.id', 'left');
 
 		if ($cari)
 		{

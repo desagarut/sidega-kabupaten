@@ -8,7 +8,7 @@
 
 	/* ==================================================================================
 		Export ke format Excel yang bisa diimpor mempergunakan Import Excel
-	  Tabel: dari tweb_wil_cluster, c; tweb_keluarga, k; tweb_penduduk:, p
+	  Tabel: dari tweb_wilayah, c; tweb_keluarga, k; tweb_penduduk:, p
 	  Kolom: c.dusun,c.rw,c.rt,p.nama,k.no_kk,p.nik,p.sex,p.tempatlahir,p.tanggallahir,p.agama_id,p.pendidikan_kk_id,p.pendidikan_sedang_id,p.pekerjaan_id,p.status_kawin,p.kk_level,p.warganegara_id,p.nama_ayah,p.nama_ibu,p.golongan_darah_id
 	*/
 
@@ -33,7 +33,7 @@
 			'k.alamat', 'c.dusun', 'c.rw', 'c.rt', 'p.nama', 'k.no_kk', 'p.nik', 'p.sex', 'p.tempatlahir', 'p.tanggallahir', 'p.agama_id', 'p.pendidikan_kk_id', 'p.pendidikan_sedang_id', 'p.pekerjaan_id', 'p.status_kawin', 'p.kk_level', 'p.warganegara_id', 'p.nama_ayah', 'p.nama_ibu', 'p.golongan_darah_id', 'p.akta_lahir', 'p.dokumen_pasport', 'p.tanggal_akhir_paspor', 'p.dokumen_kitas', 'p.ayah_nik', 'p.ibu_nik', 'p.akta_perkawinan', 'p.tanggalperkawinan', 'p.akta_perceraian', 'p.tanggalperceraian', 'p.cacat_id', 'p.cara_kb_id', 'p.hamil', 'p.id', 'p.foto', 'p.status_dasar', 'p.ktp_el', 'p.status_rekam', 'p.alamat_sekarang', 'p.created_at', 'p.updated_at', "CONCAT('{$kode_desa}') as desa_id"])
 			->from('tweb_penduduk p')
 			->join('tweb_keluarga k', 'k.id = p.id_kk', 'left')
-			->join('tweb_wil_cluster c', 'p.id_cluster = c.id', 'left')
+			->join('tweb_wilayah c', 'p.id_cluster = c.id', 'left')
 			->order_by('k.no_kk ASC', 'p.kk_level ASC')
 			->get()->result();
 
@@ -69,7 +69,7 @@
 
 			FROM tweb_penduduk p
 			LEFT JOIN tweb_keluarga k on k.id = p.id_kk
-			LEFT JOIN tweb_wil_cluster c on p.id_cluster = c.id
+			LEFT JOIN tweb_wilayah c on p.id_cluster = c.id
 			ORDER BY k.no_kk, p.kk_level
 		";
 		$q = $this->db->query($sql);
@@ -98,7 +98,7 @@
 		$return = "";
 		$return.=$this->_build_schema('tweb_penduduk', 'penduduk');
 		$return.=$this->_build_schema('tweb_keluarga', 'keluarga');
-		$return.=$this->_build_schema('tweb_wil_cluster', 'cluster');
+		$return.=$this->_build_schema('tweb_wilayah', 'cluster');
 
 		Header('Content-type: application/octet-stream');
 		Header('Content-Disposition: attachment; filename=data_dasar('.date("d-m-Y").').sid');

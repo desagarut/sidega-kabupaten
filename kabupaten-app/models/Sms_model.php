@@ -567,7 +567,7 @@ class Sms_model extends MY_Model {
 		$sql = "SELECT no_hp
 			FROM kontak k
 			LEFT JOIN tweb_penduduk u on k.id_pend = u.id
-			LEFT JOIN tweb_wil_cluster a on u.id_cluster = a.id
+			LEFT JOIN tweb_wilayah a on u.id_cluster = a.id
 			WHERE 1 ";
 
 		$sql .= $this->sex_sql();

@@ -315,7 +315,7 @@ class Pamong_model extends CI_Model {
 	{
 		$data = $this->db->select('u.id, u.nik, u.nama, w.dusun, w.rw, w.rt, u.sex')
 			->from('penduduk_hidup u')
-			->join('tweb_wil_cluster w', 'u.id_cluster = w.id', 'left')
+			->join('tweb_wilayah w', 'u.id_cluster = w.id', 'left')
 			->where('u.id NOT IN (SELECT id_pend FROM tweb_desa_pamong WHERE id_pend IS NOT NULL)')
 			->get()
 			->result_array();

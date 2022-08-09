@@ -87,12 +87,12 @@ class First_m extends CI_Model {
     public function last_login(int $limit = 2)
     {
         $query = "
-            SELECT tweb_penduduk.id, tweb_penduduk.nama, tweb_penduduk.nik, tweb_wil_cluster.dusun
+            SELECT tweb_penduduk.id, tweb_penduduk.nama, tweb_penduduk.nik, tweb_wilayah.dusun
             FROM tweb_penduduk_mandiri
             JOIN tweb_penduduk
             ON tweb_penduduk_mandiri.id_pend = tweb_penduduk.id
-            JOIN tweb_wil_cluster
-            ON tweb_penduduk.id_cluster = tweb_wil_cluster.id 
+            JOIN tweb_wilayah
+            ON tweb_penduduk.id_cluster = tweb_wilayah.id 
             ORDER BY tweb_penduduk_mandiri.last_login DESC
             LIMIT 2;";
         return $this->db->query($query)->result_array();

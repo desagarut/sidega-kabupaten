@@ -62,7 +62,7 @@ class Covid19_vaksin_model extends CI_Model
 
 		$this->db->select('p.id as id, p.nik as nik, p.nama, w.rt, w.rw, w.dusun');
 		$this->db->from('penduduk_hidup p');
-		$this->db->join('tweb_wil_cluster w', 'w.id = p.id_cluster', 'left');
+		$this->db->join('tweb_wilayah w', 'w.id = p.id_cluster', 'left');
 
 		if (!empty($not_in_peserta_vaksin))
 		{
@@ -96,7 +96,7 @@ class Covid19_vaksin_model extends CI_Model
 		$this->db->join('tweb_penduduk_agama a', 'u.agama_id = a.id', 'left');
 		$this->db->join('tweb_penduduk_pendidikan_kk d', 'u.pendidikan_kk_id = d.id', 'left');
 		$this->db->join('tweb_penduduk_pekerjaan j', 'u.pekerjaan_id = j.id', 'left');
-		$this->db->join('tweb_wil_cluster c', 'u.id_cluster = c.id', 'left');
+		$this->db->join('tweb_wilayah c', 'u.id_cluster = c.id', 'left');
 		$this->db->join('tweb_keluarga k', 'u.id_kk = k.id', 'left');
 		$this->db->join('tweb_penduduk_warganegara f', 'u.warganegara_id = f.id', 'left');
 
@@ -120,7 +120,7 @@ class Covid19_vaksin_model extends CI_Model
 		$this->db->from('covid19_vaksin s');
 		$this->db->join('tweb_penduduk o', 's.id_terdata = o.id', 'left');
 		$this->db->join('tweb_keluarga k', 'k.id = o.id_kk', 'left');
-		$this->db->join('tweb_wil_cluster w', 'w.id = o.id_cluster', 'left');
+		$this->db->join('tweb_wilayah w', 'w.id = o.id_cluster', 'left');
 
 		if (isset($id))
 			$this->db->where('s.id', $id);

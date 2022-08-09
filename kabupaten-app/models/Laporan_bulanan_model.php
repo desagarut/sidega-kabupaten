@@ -118,7 +118,7 @@
 			(select count(id) from penduduk_hidup where sakit_menahun_id is not null and sakit_menahun_id <>'0' and sakit_menahun_id <>'14' and id_cluster=c.id and sex='1') as sakit_L,
 			(select count(id) from penduduk_hidup where sakit_menahun_id is not null and sakit_menahun_id <>'0' and sakit_menahun_id <>'14' and id_cluster=c.id and sex='2') as sakit_P,
 			(select count(id) from penduduk_hidup where hamil='1' and id_cluster=c.id) as hamil
-			from  tweb_wil_cluster c WHERE rw<>'0' AND rt<>'0' AND (select count(id) from tweb_penduduk where id_cluster=c.id)>0 ";
+			from  tweb_wilayah c WHERE rw<>'0' AND rt<>'0' AND (select count(id) from tweb_penduduk where id_cluster=c.id)>0 ";
 
 		$sql .= $this->dusun_sql();
 		$sql .= " ORDER BY c.dusun,c.rw,c.rt ";
@@ -136,7 +136,7 @@
 
   public function list_dusun()
   {
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rt = '0' AND rw = '0' ";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rt = '0' AND rw = '0' ";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;

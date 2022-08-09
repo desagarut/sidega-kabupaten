@@ -71,7 +71,7 @@
 	{
 		$this->db
 				->from('tweb_penduduk u')
-				->join('tweb_wil_cluster w', 'u.id_cluster = w.id', 'left')
+				->join('tweb_wilayah w', 'u.id_cluster = w.id', 'left')
 				->where('status_dasar', 1);
 		if ($filter['sex']) $this->db->where('sex', $filter['sex']);
 		if ($filter['bersurat']) $this->db->join('log_surat h', 'u.id = h.id_pend');
@@ -151,7 +151,7 @@
 		$this->db
 				->select('u.id, nik, u.tag_id_card, nama, w.dusun, w.rw, w.rt, u.sex')
 				->from('tweb_penduduk u')
-				->join('tweb_wil_cluster w', 'u.id_cluster = w.id', 'left')
+				->join('tweb_wilayah w', 'u.id_cluster = w.id', 'left')
 				->where('status_dasar', '1');
 		$data = $this->db->get()->result_array();
 
@@ -215,7 +215,7 @@
 		left join tweb_penduduk_agama a on u.agama_id = a.id
 		left join tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
 		left join tweb_penduduk_pekerjaan j on u.pekerjaan_id = j.id
-		left join tweb_wil_cluster c on u.id_cluster = c.id
+		left join tweb_wilayah c on u.id_cluster = c.id
 		left join tweb_keluarga k on u.id_kk = k.id
 		left join tweb_penduduk_warganegara f on u.warganegara_id = f.id
 		left join tweb_penduduk_status s on u.status = s.id
@@ -251,7 +251,7 @@
 			LEFT JOIN tweb_penduduk_agama a on u.agama_id = a.id
 			LEFT JOIN tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
 			LEFT JOIN tweb_penduduk_pekerjaan j on u.pekerjaan_id = j.id
-			LEFT JOIN tweb_wil_cluster c on u.id_cluster = c.id
+			LEFT JOIN tweb_wilayah c on u.id_cluster = c.id
 			LEFT JOIN tweb_keluarga k on u.id_kk = k.id
 			LEFT JOIN tweb_penduduk_warganegara f on u.warganegara_id = f.id
 			WHERE u.nik IN($outp)";
@@ -297,7 +297,7 @@
 			left join tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
 			left join tweb_penduduk_pekerjaan j on u.pekerjaan_id = j.id
 			left join tweb_cacat m on u.cacat_id = m.id
-			left join tweb_wil_cluster c on u.id_cluster = c.id
+			left join tweb_wilayah c on u.id_cluster = c.id
 			left join tweb_keluarga k on u.id_kk = k.id
 			left join tweb_penduduk_warganegara f on u.warganegara_id = f.id
 			left join tweb_golongan_darah g on u.golongan_darah_id = g.id
@@ -353,7 +353,7 @@
 			left join tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
 			left join tweb_penduduk_pekerjaan r on u.pekerjaan_id = r.id
 			left join tweb_cacat m on u.cacat_id = m.id
-			left join tweb_wil_cluster c on u.id_cluster = c.id
+			left join tweb_wilayah c on u.id_cluster = c.id
 			left join tweb_penduduk_warganegara w on u.warganegara_id = w.id
 			left join tweb_penduduk_agama n on u.agama_id = n.id
 			LEFT JOIN tweb_penduduk_sex sex ON u.sex = sex.id
@@ -372,7 +372,7 @@
 			FROM tweb_penduduk a
 			LEFT JOIN tweb_keluarga b ON a.id_kk = b.id
 			LEFT JOIN tweb_penduduk c ON b.nik_kepala = c.id
-			LEFT JOIN tweb_wil_cluster d ON c.id_cluster = d.id
+			LEFT JOIN tweb_wilayah d ON c.id_cluster = d.id
 			WHERE a.id = ? ";
 		$query = $this->db->query($sql, $id);
 		$data = $query->row_array();
@@ -513,21 +513,21 @@
 
 	public function get_dusun($dusun='')
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE dusun = ? AND rt = '0' AND rw = '0'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE dusun = ? AND rt = '0' AND rw = '0'";
 		$query = $this->db->query($sql, $dusun);
 		return $query->row_array();
 	}
 
 	public function get_rw($dusun='', $rw='')
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE dusun = ? AND rw = ? AND rt = '0'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE dusun = ? AND rw = ? AND rt = '0'";
 		$query = $this->db->query($sql, array($dusun, $rw));
 		return $query->row_array();
 	}
 
 	public function get_rt($dusun='', $rw='', $rt='')
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE dusun = ? AND rw = ? AND rt = ?";
+		$sql = "SELECT * FROM tweb_wilayah WHERE dusun = ? AND rw = ? AND rt = ?";
 		$query = $this->db->query($sql, array($dusun, $rw, $rt));
 		return $query->row_array();
 	}

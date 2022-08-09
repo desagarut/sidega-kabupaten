@@ -257,7 +257,7 @@ class Plan_garis_model extends MY_Model {
 
 	public function list_dusun()
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rt = '0' AND rw = '0' ";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rt = '0' AND rw = '0' ";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;

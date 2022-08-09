@@ -65,7 +65,7 @@ class Letterc_model extends CI_Model {
 			->join('ref_persil_kelas k', 'k.id = p.kelas', 'left')
 			->join('letterc_penduduk cu', 'cu.id_letterc = c.id', 'left')
 			->join('tweb_penduduk u', 'u.id = cu.id_pend', 'left')
-			->join('tweb_wil_cluster w', 'w.id = u.id_cluster', 'left');
+			->join('tweb_wilayah w', 'w.id = u.id_cluster', 'left');
 		$this->search_sql();
 	}
 
@@ -172,7 +172,7 @@ class Letterc_model extends CI_Model {
 			->join('letterc c', 'c.id = m.id_letterc_masuk', 'left')
 			->join('persil p', 'm.id_persil = p.id', 'left')
 			->join('ref_persil_kelas k', 'k.id = p.kelas', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->where('m.id', $id_mutasi)
 			->get()
 			->row_array();
@@ -198,7 +198,7 @@ class Letterc_model extends CI_Model {
 			->from('letterc c')
 			->join('letterc_penduduk cu', 'cu.id_letterc = c.id', 'left')
 			->join('tweb_penduduk u', 'u.id = cu.id_pend', 'left')
-			->join('tweb_wil_cluster w', 'w.id = u.id_cluster', 'left')
+			->join('tweb_wilayah w', 'w.id = u.id_cluster', 'left')
 			->limit(1)
 			->get()
 			->row_array();
@@ -305,7 +305,7 @@ class Letterc_model extends CI_Model {
 			->join('letterc_penduduk cp', 'c.id = cp.id_letterc', 'left')
 			->join('tweb_penduduk p', 'p.id = cp.id_pend', 'left')
 			->join('tweb_keluarga k','k.id = p.id_kk', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_cluster', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_cluster', 'left')
 			->where('c.id', $id_letterc);
 		$data = $this->db->get()->row_array();
 
@@ -328,7 +328,7 @@ class Letterc_model extends CI_Model {
 			->join('letterc c', 'c.id = m.id_letterc_masuk', 'left')
 			->join('persil p', 'p.id = m.id_persil', 'left')
 			->join('ref_persil_kelas rk', 'p.kelas = rk.id', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->group_start()
 				->where('m.id_letterc_masuk', $id_letterc)
 				->or_where('m.letterc_keluar', $id_letterc)
@@ -349,7 +349,7 @@ class Letterc_model extends CI_Model {
 			->from('persil p')
 			->join('mutasi_letterc m', 'p.id = m.id_persil', 'left')
 			->join('ref_persil_kelas rk', 'p.kelas = rk.id', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->group_start()
 				->where('m.id_letterc_masuk', $id_letterc)
 				->or_where('m.letterc_keluar', $id_letterc)
@@ -471,7 +471,7 @@ class Letterc_model extends CI_Model {
 		$this->db->select('p.id, p.nik,p.nama,k.no_kk,w.rt,w.rw,w.dusun')
 			->from('tweb_penduduk p')
 			->join('tweb_keluarga k','k.id = p.id_kk', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_cluster', 'left');
+			->join('tweb_wilayah w', 'w.id = p.id_cluster', 'left');
 		if ($nik)
 			$this->db->where('p.nik', $id);
 		else
@@ -485,7 +485,7 @@ class Letterc_model extends CI_Model {
 	{
 		$strSQL = "SELECT p.nik,p.nama,k.no_kk,w.rt,w.rw,w.dusun FROM tweb_penduduk p
 			LEFT JOIN tweb_keluarga k ON k.id = p.id_kk
-			LEFT JOIN tweb_wil_cluster w ON w.id = p.id_cluster
+			LEFT JOIN tweb_wilayah w ON w.id = p.id_cluster
 			WHERE 1 ORDER BY nama";
 		$query = $this->db->query($strSQL);
 		$data = "";

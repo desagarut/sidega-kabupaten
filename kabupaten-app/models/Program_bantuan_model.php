@@ -182,7 +182,7 @@ class Program_bantuan_model extends MY_Model {
 					LEFT JOIN tweb_penduduk o ON p.peserta = o.nik
 					LEFT JOIN tweb_penduduk_sex x ON x.id = o.sex
 					LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
-					LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 					WHERE p.program_id =".$slug;
 				break;
 
@@ -195,7 +195,7 @@ class Program_bantuan_model extends MY_Model {
 					LEFT JOIN tweb_penduduk o ON k.nik_kepala = o.id
 					LEFT JOIN tweb_penduduk kartu on p.kartu_id_pend = kartu.id
 					LEFT JOIN tweb_penduduk_sex x ON x.id = kartu.sex
-					LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 					WHERE p.program_id =".$slug;
 				break;
 
@@ -206,7 +206,7 @@ class Program_bantuan_model extends MY_Model {
 					LEFT JOIN tweb_rtm r ON r.no_kk = p.peserta
 					LEFT JOIN tweb_penduduk o ON o.id = r.nik_kepala
 					LEFT JOIN tweb_penduduk_sex x ON x.id = o.sex
-					LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 					WHERE p.program_id=".$slug;
 				break;
 
@@ -218,7 +218,7 @@ class Program_bantuan_model extends MY_Model {
 					LEFT JOIN tweb_penduduk o ON o.id = r.id_ketua
 					LEFT JOIN tweb_penduduk_sex x ON x.id = o.sex
 					LEFT JOIN tweb_keluarga k on k.id = o.id_kk
-					LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 					WHERE p.program_id=".$slug;
 				break;
 
@@ -478,7 +478,7 @@ class Program_bantuan_model extends MY_Model {
 		 * */
 		$strSQL = "SELECT p.nik, p.nama, w.rt, w.rw, w.dusun
 			FROM penduduk_hidup p
-			LEFT JOIN tweb_wil_cluster w ON w.id = p.id_cluster
+			LEFT JOIN tweb_wilayah w ON w.id = p.id_cluster
 			WHERE 1 ORDER BY nama";
 		$query = $this->db->query($strSQL);
 		$data = "";
@@ -522,7 +522,7 @@ class Program_bantuan_model extends MY_Model {
 			->from('penduduk_hidup p')
 			->join('tweb_penduduk_hubungan h', 'h.id = p.kk_level', 'LEFT')
 			->join('keluarga_aktif k', 'k.id = p.id_kk', 'OUTER JOIN')
-			->join('tweb_wil_cluster w', 'w.id = k.id_cluster', 'LEFT')
+			->join('tweb_wilayah w', 'w.id = k.id_cluster', 'LEFT')
 			->where_in('p.kk_level', ['1', '2', '3', '4'])
 			->order_by('p.id_kk')
 			->get();
@@ -561,7 +561,7 @@ class Program_bantuan_model extends MY_Model {
 
 		$strSQL = "SELECT r.no_kk as id, o.nama, w.rt, w.rw, w.dusun  FROM tweb_rtm r
 			LEFT JOIN tweb_penduduk o ON o.id = r.nik_kepala
-			LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+			LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 			WHERE 1
 			";
 		$query = $this->db->query($strSQL);
@@ -598,7 +598,7 @@ class Program_bantuan_model extends MY_Model {
 		 * */
 		$strSQL = "SELECT k.id,k.nama as nama_kelompok, o.nama, w.rt, w.rw, w.dusun FROM kelompok k
 			LEFT JOIN tweb_penduduk o ON o.id = k.id_ketua
-			LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+			LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 			WHERE 1";
 		$query = $this->db->query($strSQL);
 		$hasil2 = array();
@@ -716,7 +716,7 @@ class Program_bantuan_model extends MY_Model {
 				 * */
 				$strSQL = "SELECT o.nama, o.foto, o.nik, w.rt, w.rw, w.dusun
 					FROM tweb_penduduk o
-					LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 					WHERE o.nik='".$id."'";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)
@@ -738,7 +738,7 @@ class Program_bantuan_model extends MY_Model {
 				 * */
 				$strSQL = "SELECT o.nik_kepala, o.no_kk, p.nama, w.rt, w.rw, w.dusun FROM tweb_keluarga o
 					LEFT JOIN tweb_penduduk p ON o.nik_kepala = p.id
-					LEFT JOIN tweb_wil_cluster w ON w.id = p.id_cluster WHERE o.no_kk = '".$id."'";
+					LEFT JOIN tweb_wilayah w ON w.id = p.id_cluster WHERE o.no_kk = '".$id."'";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)
 				{
@@ -758,7 +758,7 @@ class Program_bantuan_model extends MY_Model {
 				 * */
 				$strSQL = "SELECT r.id, r.no_kk, o.nama, o.nik, w.rt, w.rw, w.dusun  FROM tweb_rtm r
 					LEFT JOIN tweb_penduduk o ON o.id = r.nik_kepala
-					LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 					WHERE r.no_kk=$id";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)
@@ -779,7 +779,7 @@ class Program_bantuan_model extends MY_Model {
 				 * */
 				$strSQL = "SELECT k.id as id, k.nama as nama, p.nama as ketua, p.nik as nik, w.rt, w.rw, w.dusun FROM kelompok k
 				 LEFT JOIN tweb_penduduk p ON p.id = k.id_ketua
-				 LEFT JOIN tweb_wil_cluster w ON w.id = p.id_cluster
+				 LEFT JOIN tweb_wilayah w ON w.id = p.id_cluster
 				 WHERE k.id='".$id."'";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)
@@ -1052,7 +1052,7 @@ class Program_bantuan_model extends MY_Model {
 			$this->db
 				->join('tweb_keluarga k', 'pp.peserta = k.no_kk')
 				->join('tweb_penduduk pend', 'k.nik_kepala = pend.id')
-				->join('tweb_wil_cluster w', 'k.id_cluster = w.id')
+				->join('tweb_wilayah w', 'k.id_cluster = w.id')
 				->where('p.sasaran', '2')
 				->where('p.status', '1');
 		}
@@ -1061,7 +1061,7 @@ class Program_bantuan_model extends MY_Model {
 			$this->db
 				->join('tweb_penduduk pend', 'pp.peserta = pend.nik')
 				->join('tweb_keluarga k', 'pend.id_kk = k.id')
-				->join('tweb_wil_cluster w', 'pend.id_cluster = w.id')
+				->join('tweb_wilayah w', 'pend.id_cluster = w.id')
 				->where('p.sasaran', '1')
 				->where('p.status', '1');
 		}
@@ -1146,7 +1146,7 @@ class Program_bantuan_model extends MY_Model {
 			->join('tweb_penduduk_pendidikan_kk k','k.id = p.pendidikan_kk_id', 'left')
 			->join('tweb_penduduk_pekerjaan j','j.id = p.pekerjaan_id', 'left')
 			->join('tweb_penduduk_warganegara w','w.id = p.warganegara_id', 'left')
-			->join('tweb_wil_cluster c','c.id = p.id_cluster', 'left')
+			->join('tweb_wilayah c','c.id = p.id_cluster', 'left')
 			->group_start()
 				->where('p.nik', $peserta_id) // Hapus jika 'peserta' sudah fix menggunakan 'id' (sesuai sasaran) sebagai referensi parameter
 				->or_where('p.id', $peserta_id)
@@ -1165,7 +1165,7 @@ class Program_bantuan_model extends MY_Model {
 			->select('k.no_kk, p.nik as nik_kk, p.nama as nama_kk, k.alamat, c.*')
 			->from('keluarga_aktif k')
 			->join('penduduk_hidup p','p.id = k.nik_kepala', 'left')
-			->join('tweb_wil_cluster c','c.id = k.id_cluster', 'left')
+			->join('tweb_wilayah c','c.id = k.id_cluster', 'left')
 			->group_start()
 				->where('k.no_kk', $id_kk) // Hapus jika 'peserta' sudah fix menggunakan 'id' (sesuai sasaran) sebagai referensi parameter
 				->or_where('k.id', $id_kk)

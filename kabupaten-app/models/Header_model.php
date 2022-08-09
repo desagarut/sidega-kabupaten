@@ -72,7 +72,7 @@ class Header_model extends CI_Model {
 
 	public function dusun_total()
 	{
-		$sql = "SELECT COUNT(id) AS jumlah FROM tweb_wil_cluster WHERE rt = '0' AND rw = '0' ";
+		$sql = "SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE rt = '0' AND rw = '0' ";
 		$query = $this->db->query($sql);
 		$data = $query->result_array();
 		return $data;

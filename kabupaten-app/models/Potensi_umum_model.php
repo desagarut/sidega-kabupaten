@@ -35,7 +35,7 @@ class Potensi_umum_model extends CI_Model {
 		])
 		->from("{$this->table} p")
 		->join('potensi_umum_dokumentasi d', 'd.id_potensi = p.id', 'left')
-		->join('tweb_wil_cluster w', 'p.id_lokasi = w.id', 'left')
+		->join('tweb_wilayah w', 'p.id_lokasi = w.id', 'left')
 		->group_by('p.id');
 
 		if (empty($search))
@@ -73,7 +73,7 @@ class Potensi_umum_model extends CI_Model {
 		])
 		->from('potensi_umum p')
 		->where('p.status = 1')
-		->join('tweb_wil_cluster w', 'p.id_lokasi = w.id', 'left')
+		->join('tweb_wilayah w', 'p.id_lokasi = w.id', 'left')
 		->get()
 		->result();
 
@@ -263,7 +263,7 @@ class Potensi_umum_model extends CI_Model {
 			) ELSE p.lokasi END) AS alamat",
 		])
 		->from("{$this->table} p")
-		->join('tweb_wil_cluster w', 'p.id_lokasi = w.id', 'left')
+		->join('tweb_wilayah w', 'p.id_lokasi = w.id', 'left')
 		->where('p.id', $id)
 		->get()
 		->row();

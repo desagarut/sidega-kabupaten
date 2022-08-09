@@ -66,7 +66,7 @@
   <div class="row align-items-center top-bar">
     <div class="col-lg-4 col-md-12 text-center text-lg-start"> <a href="<?= site_url('first') ?>" class="navbar-brand m-0 p-0">
       <h1 class="fw-bold text-danger m-0">
-      <a href="<?= site_url('first') ?>"> <img src="<?= gambar_desa($desa['logo']) ?>" style="padding-bottom: 5px; width:58px;" alt="Logo"> 
+      <a href="<?= site_url('first') ?>"> <img src="<?= gambar_kabupaten($desa['logo']) ?>" style="padding-bottom: 5px; width:58px;" alt="Logo"> 
       <!-- <?= $this->setting->website_title ?></a></h1>--> 
       <img src="<?= base_url("$this->theme_folder/$this->theme/img/sisiteras-biru.png")?>" style="padding-bottom: 5px; height:70px;" alt="Logo"alt="Logo"> </a> </div>
     <div class="col-lg-8 col-md-7 d-none d-lg-block">

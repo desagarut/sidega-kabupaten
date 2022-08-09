@@ -108,7 +108,7 @@ class Data_persil_model extends MY_Model {
 			->distinct()
 			->select('w.dusun')
 			->from('persil p')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->where("w.dusun IS NOT NULL");
 		$this->filter_kelas();
 
@@ -125,7 +125,7 @@ class Data_persil_model extends MY_Model {
 			->distinct()
 			->select('w.rw')
 			->from('persil p')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->where("w.dusun IS NOT NULL")
 			->where('dusun', $dusun)
 			->get()
@@ -140,7 +140,7 @@ class Data_persil_model extends MY_Model {
 			->distinct()
 			->select('w.rt')
 			->from('persil p')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->where("w.dusun IS NOT NULL")
 			->where('dusun', $dusun)
 			->where('rw', $rw)
@@ -167,7 +167,7 @@ class Data_persil_model extends MY_Model {
 	{
 		$this->db->from('persil p')
 			->join('ref_persil_kelas k', 'k.id = p.kelas', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->join('mutasi_letterc m', 'p.id = m.id_persil', 'left')
 			->join('letterc c', 'c.id = p.letterc_awal', 'left')
 			->group_by('p.id, nomor_urut_bidang');
@@ -205,7 +205,7 @@ class Data_persil_model extends MY_Model {
 			->select('p.id, nomor, nomor_urut_bidang')
 			->select('CONCAT("RT ", w.rt, " / RW ", w.rw, " - ", w.dusun) as lokasi')
 			->from('persil p')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah')
 			->order_by('nomor, nomor_urut_bidang')
 			->get()->result_array();
 		return $data;
@@ -217,7 +217,7 @@ class Data_persil_model extends MY_Model {
 			->select('CONCAT("RT ", w.rt, " / RW ", w.rw, " - ", w.dusun) as alamat')
 			->from('persil p')
 			->join('ref_persil_kelas k', 'k.id = p.kelas', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_wilayah', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_wilayah', 'left')
 			->join('letterc c', 'c.id = p.letterc_awal', 'left')
 			->where('p.id', $id)
 			->get()->row_array();
@@ -281,7 +281,7 @@ class Data_persil_model extends MY_Model {
 
 	public function list_dusunrwrt()
 	{
-		$strSQL = "SELECT `id`,`rt`,`rw`,`dusun` FROM `tweb_wil_cluster` WHERE (`rt`>0) ORDER BY `dusun`";
+		$strSQL = "SELECT `id`,`rt`,`rw`,`dusun` FROM `tweb_wilayah` WHERE (`rt`>0) ORDER BY `dusun`";
 		$query = $this->db->query($strSQL);
 		return $query->result_array();
 	}

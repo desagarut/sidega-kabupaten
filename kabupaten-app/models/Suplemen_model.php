@@ -86,7 +86,7 @@ class Suplemen_model extends MY_Model {
 
 		$data = $this->db->select('p.id as id, p.nik as nik, p.nama, w.rt, w.rw, w.dusun')
 			->from('tweb_penduduk p')
-			->join('tweb_wil_cluster w', 'w.id = p.id_cluster', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_cluster', 'left')
 			->get()
 			->result_array();
 
@@ -126,7 +126,7 @@ class Suplemen_model extends MY_Model {
 		$data = $this->db->select('k.id as id, k.no_kk, p.nama, w.rt, w.rw, w.dusun')
 			->from('tweb_keluarga k')
 			->join('tweb_penduduk p', 'p.id = k.nik_kepala', 'left')
-			->join('tweb_wil_cluster w', 'w.id = p.id_cluster', 'left')
+			->join('tweb_wilayah w', 'w.id = p.id_cluster', 'left')
 			->get()
 			->result_array();
 
@@ -216,7 +216,7 @@ class Suplemen_model extends MY_Model {
 		$sql = " FROM suplemen_terdata s
 			LEFT JOIN tweb_penduduk o ON s.id_terdata = o.id
 			LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
-			LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+			LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 			WHERE s.id_suplemen=".$suplemen_id;
 		return $sql;
 	}
@@ -263,7 +263,7 @@ class Suplemen_model extends MY_Model {
 		$sql = " FROM suplemen_terdata s
 			LEFT JOIN tweb_keluarga o ON s.id_terdata = o.id
 			LEFT JOIN tweb_penduduk q ON o.nik_kepala = q.id
-			LEFT JOIN tweb_wil_cluster w ON w.id = q.id_cluster
+			LEFT JOIN tweb_wilayah w ON w.id = q.id_cluster
 			WHERE s.id_suplemen=".$suplemen_id;
 		return $sql;
 	}
@@ -324,7 +324,7 @@ class Suplemen_model extends MY_Model {
 				left join tweb_penduduk_agama a on u.agama_id = a.id
 				left join tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
 				left join tweb_penduduk_pekerjaan j on u.pekerjaan_id = j.id
-				left join tweb_wil_cluster c on u.id_cluster = c.id
+				left join tweb_wilayah c on u.id_cluster = c.id
 				left join tweb_keluarga k on u.id_kk = k.id
 				left join tweb_penduduk_warganegara f on u.warganegara_id = f.id
 				WHERE u.id = ?";
@@ -464,7 +464,7 @@ class Suplemen_model extends MY_Model {
 				(case when (o.id_kk IS NULL or o.id_kk = 0) then o.alamat_sekarang else k.alamat end) AS alamat
 					FROM tweb_penduduk o
 					LEFT JOIN tweb_keluarga k ON k.id = o.id_kk
-					LEFT JOIN tweb_wil_cluster w ON w.id = o.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = o.id_cluster
 					WHERE o.id = '".$id_terdata."'";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)
@@ -486,7 +486,7 @@ class Suplemen_model extends MY_Model {
 				$strSQL = "SELECT o.nik_kepala, o.no_kk, o.alamat, p.nama, w.rt, w.rw, w.dusun
 					FROM tweb_keluarga o
 					LEFT JOIN tweb_penduduk p ON o.nik_kepala = p.id
-					LEFT JOIN tweb_wil_cluster w ON w.id = p.id_cluster
+					LEFT JOIN tweb_wilayah w ON w.id = p.id_cluster
 					WHERE o.id = '".$id_terdata."'";
 				$query = $this->db->query($strSQL);
 				if ($query->num_rows() > 0)

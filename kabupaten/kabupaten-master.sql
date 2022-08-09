@@ -28702,11 +28702,11 @@ insert  into `tweb_surat_format`(`id`,`nama`,`url_surat`,`kode_surat`,`lampiran`
 (178,'Raw','raw',NULL,NULL,0,0,2,0,1,'M'),
 (179,'surat keterangan usaha dan skck permohonan pinjaman bank','surat_surat_keterangan_usaha_dan_skck_permohonan_pinjaman_bank','S-50',NULL,0,1,2,1,3,'M');
 
-/*Table structure for table `tweb_wil_cluster` */
+/*Table structure for table `tweb_wilayah` */
 
-DROP TABLE IF EXISTS `tweb_wil_cluster`;
+DROP TABLE IF EXISTS `tweb_wilayah`;
 
-CREATE TABLE `tweb_wil_cluster` (
+CREATE TABLE `tweb_wilayah` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rt` varchar(3) NOT NULL DEFAULT '0',
   `rw` varchar(3) NOT NULL DEFAULT '0',
@@ -28725,9 +28725,9 @@ CREATE TABLE `tweb_wil_cluster` (
   KEY `id_kepala` (`id_kepala`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
-/*Data for the table `tweb_wil_cluster` */
+/*Data for the table `tweb_wilayah` */
 
-insert  into `tweb_wil_cluster`(`id`,`rt`,`rw`,`dusun`,`desa`,`kecamatan`,`id_kepala`,`lat`,`lng`,`zoom`,`path`,`map_tipe`,`warna`) values 
+insert  into `tweb_wilayah`(`id`,`rt`,`rw`,`dusun`,`desa`,`kecamatan`,`id_kepala`,`lat`,`lng`,`zoom`,`path`,`map_tipe`,`warna`) values 
 (38,'0','0','0','0','CISOMPET',1,NULL,NULL,NULL,NULL,NULL,NULL),
 (39,'0','0','0','-','CISOMPET',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (40,'0','0','-','-','CISOMPET',NULL,NULL,NULL,NULL,NULL,NULL,NULL),

@@ -28,7 +28,7 @@ class Laporan_penduduk_model extends MY_Model {
 	{
 		$sql = $this->db
 		->select()
-		->from('tweb_wil_cluster')
+		->from('tweb_wilayah')
 		->where('rt', '0')
 		->where('rw', '0')
 		->get();
@@ -41,7 +41,7 @@ class Laporan_penduduk_model extends MY_Model {
 	{
 		$sql = $this->db
 		->select()
-		->from('tweb_wil_cluster')
+		->from('tweb_wilayah')
 		->where('rt', '0')
 		->where('dusun', $dusun)
 		->where('rw <>', '0')
@@ -55,7 +55,7 @@ class Laporan_penduduk_model extends MY_Model {
 	{
 		$sql = $this->db
 		->select()
-		->from('tweb_wil_cluster')
+		->from('tweb_wilayah')
 		->where('dusun', $dusun)
 		->where('rw', $rw)
 		->where('rt <>', '0')
@@ -94,7 +94,7 @@ class Laporan_penduduk_model extends MY_Model {
 	protected function get_jumlah_sql($fk = false, $delimiter = false, $where = 0)
 	{
 		$sql = "(SELECT COUNT(b.id) FROM penduduk_hidup b
-		LEFT JOIN tweb_wil_cluster a ON b.id_cluster = a.id
+		LEFT JOIN tweb_wilayah a ON b.id_cluster = a.id
 		WHERE 1 ";
 		$sql .= $fk ? "AND $fk = u.id " : "";
 		$sql .= $where ? : '';
@@ -110,7 +110,7 @@ class Laporan_penduduk_model extends MY_Model {
 	protected function get_laki_sql($fk = false, $delimiter = false, $where = 0)
 	{
 		$sql = "(SELECT COUNT(b.id) FROM penduduk_hidup b
-		LEFT JOIN tweb_wil_cluster a ON b.id_cluster = a.id
+		LEFT JOIN tweb_wilayah a ON b.id_cluster = a.id
 		WHERE sex = 1 ";
 		$sql .= $fk ? "AND $fk = u.id " : "";
 		$sql .= $where ? : '';
@@ -126,7 +126,7 @@ class Laporan_penduduk_model extends MY_Model {
 	protected function get_perempuan_sql($fk = false, $delimiter = false, $where = 0)
 	{
 		$sql = "(SELECT COUNT(b.id) FROM penduduk_hidup b
-		LEFT JOIN tweb_wil_cluster a ON b.id_cluster = a.id
+		LEFT JOIN tweb_wilayah a ON b.id_cluster = a.id
 		WHERE sex = 2 ";
 		$sql .= $fk ? "AND $fk = u.id " : "";
 		$sql .= $where ? : '';
@@ -245,7 +245,7 @@ class Laporan_penduduk_model extends MY_Model {
 		->select('COUNT(CASE WHEN p.sex = 2 THEN p.id END) AS perempuan')
 		->from("$tabel_referensi u")
 		->join('penduduk_hidup p', "u.id = p.$id_referensi", 'left')
-		->join('tweb_wil_cluster a', 'p.id_cluster = a.id', 'left')
+		->join('tweb_wilayah a', 'p.id_cluster = a.id', 'left')
 		->group_by('u.id');
 
 		if ($dusun = $this->session->userdata("dusun")) $this->db->where('a.dusun', $dusun);
@@ -260,7 +260,7 @@ class Laporan_penduduk_model extends MY_Model {
 		->select('COUNT(CASE WHEN b.sex = 1 THEN b.id END) AS laki')
 		->select('COUNT(CASE WHEN b.sex = 2 THEN b.id END) AS perempuan')
 		->from('penduduk_hidup b')
-		->join('tweb_wil_cluster a', 'b.id_cluster = a.id', 'left');
+		->join('tweb_wilayah a', 'b.id_cluster = a.id', 'left');
 
 		if ($dusun = $this->session->userdata("dusun")) $this->db->where('a.dusun', $dusun);
 		if ($rw = $this->session->userdata("rw")) $this->db->where('a.rw', $rw);
@@ -333,7 +333,7 @@ class Laporan_penduduk_model extends MY_Model {
 		if ($sex) $this->db->where('b.sex', $sex);
 		$str_jml_penduduk = $this->db->select('COUNT(b.id)')
 		->from('penduduk_hidup b')
-		->join('tweb_wil_cluster a', 'b.id_cluster = a.id')
+		->join('tweb_wilayah a', 'b.id_cluster = a.id')
 		->where($where)
 		->get_compiled_select();
 

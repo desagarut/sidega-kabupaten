@@ -11,10 +11,10 @@
 		$subjek = $_SESSION['subjek_tipe'];
 		switch ($subjek)
 		{
-			case 1: $sql = "SELECT nik AS no_kk FROM penduduk_hidup UNION SELECT u.nama FROM penduduk_hidup u LEFT JOIN tweb_wil_cluster c ON u.id_cluster = c.id "; break;
-			case 2: $sql = "SELECT no_kk FROM keluarga_aktif UNION SELECT p.nama FROM keluarga_aktif u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id "; break;
-			case 3: $sql = "SELECT no_kk FROM tweb_rtm UNION SELECT p.nama FROM tweb_rtm u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE 1"; break;
-			case 4: $sql = "SELECT u.nama AS no_kk FROM kelompok u LEFT JOIN penduduk_hidup p ON u.id_ketua = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE 1"; break;
+			case 1: $sql = "SELECT nik AS no_kk FROM penduduk_hidup UNION SELECT u.nama FROM penduduk_hidup u LEFT JOIN tweb_wilayah c ON u.id_cluster = c.id "; break;
+			case 2: $sql = "SELECT no_kk FROM keluarga_aktif UNION SELECT p.nama FROM keluarga_aktif u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id "; break;
+			case 3: $sql = "SELECT no_kk FROM tweb_rtm UNION SELECT p.nama FROM tweb_rtm u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE 1"; break;
+			case 4: $sql = "SELECT u.nama AS no_kk FROM kelompok u LEFT JOIN penduduk_hidup p ON u.id_ketua = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE 1"; break;
 			default: return null;
 		}
 		$sql .= $this->dusun_sql();
@@ -131,7 +131,7 @@
 		{
 			case 1:
 				$sql = " FROM penduduk_hidup u
-					LEFT JOIN tweb_wil_cluster c ON u.id_cluster = c.id
+					LEFT JOIN tweb_wilayah c ON u.id_cluster = c.id
 					WHERE 1
 				";
 				break;
@@ -139,7 +139,7 @@
 			case 2:
 				$sql = " FROM keluarga_aktif u
 					LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id
-					LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id
+					LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id
 					WHERE 1
 				" ;
 				break;
@@ -147,7 +147,7 @@
 			case 3:
 				$sql = " FROM tweb_rtm u
 					LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id
-					LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id
+					LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id
 					WHERE 1
 				";
 				break;
@@ -155,7 +155,7 @@
 			case 4:
 				$sql = " FROM kelompok u
 					LEFT JOIN penduduk_hidup p ON u.id_ketua = p.id
-					LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id
+					LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id
 					WHERE 1
 				";
 				break;
@@ -650,13 +650,13 @@
 		$subjek = $_SESSION['subjek_tipe'];
 		switch ($subjek)
 		{
-			case 1: $sql = "SELECT u.id,u.nik AS nid,u.nama,u.sex,c.dusun,c.rw,c.rt FROM penduduk_hidup u LEFT JOIN tweb_wil_cluster c ON u.id_cluster = c.id WHERE u.id = ? "; break;
+			case 1: $sql = "SELECT u.id,u.nik AS nid,u.nama,u.sex,c.dusun,c.rw,c.rt FROM penduduk_hidup u LEFT JOIN tweb_wilayah c ON u.id_cluster = c.id WHERE u.id = ? "; break;
 
-			case 2: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM keluarga_aktif u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE u.id = ? " ; break;
+			case 2: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM keluarga_aktif u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE u.id = ? " ; break;
 
-			case 3: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM tweb_rtm u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE u.id = ? "; break;
+			case 3: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM tweb_rtm u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE u.id = ? "; break;
 
-			case 4: $sql = "SELECT u.id,u.kode AS nid,u.nama,p.sex,c.dusun,c.rw,c.rt FROM kelompok u LEFT JOIN penduduk_hidup p ON u.id_ketua = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE u.id = ? "; break;
+			case 4: $sql = "SELECT u.id,u.kode AS nid,u.nama,p.sex,c.dusun,c.rw,c.rt FROM kelompok u LEFT JOIN penduduk_hidup p ON u.id_ketua = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE u.id = ? "; break;
 
 			default: return null;
 		}
@@ -740,10 +740,10 @@
 		$subjek = $_SESSION['subjek_tipe'];
 		switch ($subjek)
 		{
-			case 1: $sql = "SELECT u.id,u.nik AS nid,u.nama,u.sex,c.dusun,c.rw,c.rt FROM penduduk_hidup u LEFT JOIN tweb_wil_cluster c ON u.id_cluster = c.id WHERE 1 "; break;
-			case 2: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM keluarga_aktif u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE 1 "; break;
-			case 3: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM tweb_rtm u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE 1" ; break;
-			case 4: $sql = "SELECT u.id,u.kode AS nid,u.nama,p.sex,c.dusun,c.rw,c.rt FROM kelompok u LEFT JOIN penduduk_hidup p ON u.id_ketua = p.id LEFT JOIN tweb_wil_cluster c ON p.id_cluster = c.id WHERE 1 "; break;
+			case 1: $sql = "SELECT u.id,u.nik AS nid,u.nama,u.sex,c.dusun,c.rw,c.rt FROM penduduk_hidup u LEFT JOIN tweb_wilayah c ON u.id_cluster = c.id WHERE 1 "; break;
+			case 2: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM keluarga_aktif u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE 1 "; break;
+			case 3: $sql = "SELECT u.id,u.no_kk AS nid,p.nama,p.sex,c.dusun,c.rw,c.rt FROM tweb_rtm u LEFT JOIN penduduk_hidup p ON u.nik_kepala = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE 1" ; break;
+			case 4: $sql = "SELECT u.id,u.kode AS nid,u.nama,p.sex,c.dusun,c.rw,c.rt FROM kelompok u LEFT JOIN penduduk_hidup p ON u.id_ketua = p.id LEFT JOIN tweb_wilayah c ON p.id_cluster = c.id WHERE 1 "; break;
 
 			default: return null; break;
 		}
@@ -1118,7 +1118,7 @@
 
 	public function list_dusun()
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rt = '0' AND rw = '0' ";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rt = '0' AND rw = '0' ";
 		$query = $this->db->query($sql);
 		$data=$query->result_array();
 		return $data;
@@ -1126,7 +1126,7 @@
 
 	public function list_rw($dusun='')
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rt = '0' AND dusun = ? AND rw <> '0'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rt = '0' AND dusun = ? AND rw <> '0'";
 		$query = $this->db->query($sql, $dusun);
 		$data=$query->result_array();
 		return $data;
@@ -1134,7 +1134,7 @@
 
 	public function list_rt($dusun='', $rw='')
 	{
-		$sql = "SELECT * FROM tweb_wil_cluster WHERE rw = ? AND dusun = ? AND rt <> '0'";
+		$sql = "SELECT * FROM tweb_wilayah WHERE rw = ? AND dusun = ? AND rt <> '0'";
 		$query = $this->db->query($sql, array($rw, $dusun));
 		$data = $query->result_array();
 		return $data;

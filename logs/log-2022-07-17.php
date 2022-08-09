@@ -1,1 +1,0 @@
-ERROR - 2022-07-17 11:44:03 --> Severity: error --> Exception: Argument 2 passed to Admin_Controller::render() must be of the type array or null, string given, called in D:\laragon\www\kabupaten-master\kabupaten-app\controllers\Sid_core.php on line 165 D:\laragon\www\kabupaten-master\kabupaten-app\core\MY_Controller.php 254

@@ -86,8 +86,8 @@
                 <img class="w-100" src="<?= base_url("$this->theme_folder/$this->theme/img/gedung1.jpg")?>" alt="Image">
                 <div class="carousel-caption">
                     <div class="p-3" style="max-width: 900px;">
-                        <h4 class="text-white text-uppercase mb-4 animated zoomIn">Selamat datang di <?= $this->setting->website_title ?></h4>
-                        <h4 class="display-1 text-white mb-0 animated zoomIn">Sistem Informasi Perencanaan Prioritas Pembangunan Partisipatif</h4>
+                        <h6 class="text-white text-uppercase mb-4 animated zoomIn">Selamat datang di <?= $this->setting->website_title ?></h6>
+                        <h6 class="display-1 text-white mb-0 animated zoomIn">Sistem Informasi Perencanaan Prioritas Pembangunan Partisipatif</h6>
                     </div>
                 </div>
             </div>
@@ -102,8 +102,7 @@
                     </a>
                     <div class="carousel-caption">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-4 animated zoomIn">Selamat datang di <?= $this->setting->website_title ?></h4>
-                            <h4 class="display-1 text-white mb-0 animated zoomIn"><?= $gambar['judul'] ?></h4>
+                            <h6 class="display-1 text-white mb-0 animated zoomIn"><?= $gambar['judul'] ?></h6>
                         </div>
                     </div>
                 </div>

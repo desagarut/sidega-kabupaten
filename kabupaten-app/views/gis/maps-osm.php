@@ -239,7 +239,7 @@
 <style>
 	#map {
 		width: 100%;
-		height: 400px;
+		height: 300px;
 		/*height:80vh*/
 	}
 </style>

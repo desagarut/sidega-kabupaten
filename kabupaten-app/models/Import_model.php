@@ -1,42 +1,44 @@
 <?php
 
 define("KOLOM_IMPOR_KELUARGA", serialize(array(
-  "alamat" => "0",
-  "dusun" => "1",
-  "rw"  => "2",
-  "rt" => "3",
-  "nama" => "4",
-  "no_kk" => "5",
-  "nik"  => "6",
-  "sex" => "7",
-  "tempatlahir" => "8",
-  "tanggallahir"  => "9",
-  "agama_id" => "10",
-  "pendidikan_kk_id" => "11",
-  "pendidikan_sedang_id" => "12",
-  "pekerjaan_id" => "13",
-  "status_kawin"  => "14",
-  "kk_level" => "15",
-  "warganegara_id" => "16",
-  "nama_ayah"  => "17",
-  "nama_ibu" => "18",
-  "golongan_darah_id" => "19",
-  "akta_lahir" => "20",
-  "dokumen_pasport" => "21",
-  "tanggal_akhir_paspor" => "22",
-  "dokumen_kitas" => "23",
-  "ayah_nik" => "24",
-  "ibu_nik" => "25",
-  "akta_perkawinan" => "26",
-  "tanggalperkawinan" => "27",
-  "akta_perceraian" => "28",
-  "tanggalperceraian" => "29",
-  "cacat_id" => "30",
-  "cara_kb_id" => "31",
-  "hamil" => "32",
-  "ktp_el" => "33",
-  "status_rekam" => "34",
-  "alamat_sekarang" => "35")));
+  "kecamatan" => "0",
+  "desa" => "1",
+  "dusun" => "2",
+  "rw"  => "3",
+  "rt" => "4",
+  "alamat" => "5",
+  "nama" => "6",
+  "no_kk" => "7",
+  "nik"  => "8",
+  "sex" => "9",
+  "tempatlahir" => "10",
+  "tanggallahir"  => "11",
+  "agama_id" => "12",
+  "pendidikan_kk_id" => "13",
+  "pendidikan_sedang_id" => "14",
+  "pekerjaan_id" => "15",
+  "status_kawin"  => "16",
+  "kk_level" => "17",
+  "warganegara_id" => "18",
+  "nama_ayah"  => "19",
+  "nama_ibu" => "20",
+  "golongan_darah_id" => "21",
+  "akta_lahir" => "22",
+  "dokumen_pasport" => "23",
+  "tanggal_akhir_paspor" => "24",
+  "dokumen_kitas" => "25",
+  "ayah_nik" => "26",
+  "ibu_nik" => "27",
+  "akta_perkawinan" => "28",
+  "tanggalperkawinan" => "29",
+  "akta_perceraian" => "30",
+  "tanggalperceraian" => "31",
+  "cacat_id" => "32",
+  "cara_kb_id" => "33",
+  "hamil" => "34",
+  "ktp_el" => "35",
+  "status_rekam" => "36",
+  "alamat_sekarang" => "37")));
 
   require_once 'vendor/spout/src/Spout/Autoloader/autoload.php';
   use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
@@ -121,8 +123,8 @@ class Import_model extends CI_Model {
   protected function data_import_valid($isi_baris)
 	{
 		// Kolom yang harus diisi
-		if ($isi_baris['nama'] == "" OR $isi_baris['nik'] == "" OR $isi_baris['dusun'] == "" OR $isi_baris['rt'] == "" OR $isi_baris['rw'] == "")
-			return 'nama/nik/dusun/rt/rw kosong';
+		if ($isi_baris['nama'] == "" OR $isi_baris['nik'] == "" OR $isi_baris['kecamatan'] == "" OR $isi_baris['desa'] == ""  OR $isi_baris['dusun'] == "" OR $isi_baris['rt'] == "" OR $isi_baris['rw'] == "")
+			return 'nama/nik/kecamatan/desa/dusun/rt/rw kosong';
 		// Validasi data setiap kolom ber-kode
 		if ($isi_baris['sex'] != "" AND !($isi_baris['sex'] >= 1 && $isi_baris['sex'] <= 2)) return 'kode sex tidak dikenal';
 		if ($isi_baris['agama_id'] != "" AND !($isi_baris['agama_id'] >= 1 && $isi_baris['agama_id'] <= 7)) return 'kode agama tidak dikenal';
@@ -175,15 +177,16 @@ class Import_model extends CI_Model {
 	private function get_isi_baris($rowData)
 	{
     $kolom_impor_keluarga = unserialize(KOLOM_IMPOR_KELUARGA);
-		$isi_baris['alamat'] = trim($rowData[$kolom_impor_keluarga['alamat']]);
-		$dusun = ltrim(trim($rowData[$kolom_impor_keluarga['dusun']]), "'");
-		$dusun = str_replace('_', ' ', $dusun);
-		$dusun = strtoupper($dusun);
-		$dusun = str_replace('DUSUN ', '', $dusun);
-		$isi_baris['dusun'] = $dusun;
-
+		$kecamatan = ltrim(trim($rowData[$kolom_impor_keluarga['kecamatan']]), "'");
+		$kecamatan = str_replace('_', ' ', $kecamatan);
+		$kecamatan = strtoupper($kecamatan);
+		$kecamatan = str_replace('KECAMATAN ', '', $kecamatan);
+		$isi_baris['kecamatan'] = $kecamatan;
+		$isi_baris['desa'] = ltrim(trim($rowData[$kolom_impor_keluarga['desa']]), "'");
+		$isi_baris['dusun'] = ltrim(trim($rowData[$kolom_impor_keluarga['dusun']]), "'");
 		$isi_baris['rw'] = ltrim(trim($rowData[$kolom_impor_keluarga['rw']]), "'");
 		$isi_baris['rt'] = ltrim(trim($rowData[$kolom_impor_keluarga['rt']]), "'");
+		$isi_baris['alamat'] = trim($rowData[$kolom_impor_keluarga['alamat']]);
 
 		$nama = trim($rowData[$kolom_impor_keluarga['nama']]);
 		$nama = preg_replace('/[^a-zA-Z0-9,\.\']/', ' ', $nama);
@@ -260,36 +263,71 @@ class Import_model extends CI_Model {
 		// Masukkan wilayah administratif ke tabel tweb_wilayah apabila
 		// wilayah administratif ini belum ada
 
-		// --- Masukkan dusun apabila belum ada
-		$query = "SELECT id FROM tweb_wilayah WHERE dusun = ?";
-		$hasil = $this->db->query($query, $isi_baris['dusun']);
+		// --- Masukkan kecamatan apabila belum ada
+		$query = "SELECT id FROM tweb_wilayah WHERE kecamatan = ?";
+		$hasil = $this->db->query($query, $isi_baris['kecamatan']);
 		$res = $hasil->row_array();
 		if (empty($res))
 		{
-			$query = "INSERT INTO tweb_wilayah(rt, rw, dusun) VALUES (0, 0, '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', 0, 0, 0, 0)";
 			$hasil = $this->db->query($query);
-			$query = "INSERT INTO tweb_wilayah(rt, rw, dusun) VALUES (0, '-', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', 0, 0, 0, '-')";
 			$hasil = $this->db->query($query);
-			$query = "INSERT INTO tweb_wilayah(rt, rw, dusun) VALUES ('-','-','".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', 0, 0, '-', '-')";
+			$hasil = $this->db->query($query);
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', 0, '-', '-', '-')";
+			$hasil = $this->db->query($query);
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '-', '-', '-', '-')";
 			$hasil = $this->db->query($query);
 		}
-
-		// --- Masukkan rw apabila belum ada
-		$query = "SELECT id FROM tweb_wilayah WHERE dusun = ? AND rw = ?";
-		$hasil = $this->db->query($query, array($isi_baris['dusun'], $isi_baris['rw']));
+		
+		// --- Masukkan desa apabila belum ada
+		$query = "SELECT id FROM tweb_wilayah WHERE kecamatan = ? AND desa = ?";
+		$hasil = $this->db->query($query, array($isi_baris['kecamatan'], $isi_baris['desa']));
 		$res = $hasil->row_array();
 		if (empty($res))
 		{
-			$query = "INSERT INTO tweb_wilayah(rt,rw,dusun) VALUES (0, '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', 0, 0, 0)";
 			$hasil = $this->db->query($query);
-			$query = "INSERT INTO tweb_wilayah(rt,rw,dusun) VALUES ('-', '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', 0, 0, '-')";
+			$hasil = $this->db->query($query);
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', 0, '-', '-')";
+			$hasil = $this->db->query($query);
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', '-', '-', '-')";
+			$hasil = $this->db->query($query);
+			$isi_baris['id_cluster'] = $this->db->insert_id();
+		}
+
+		// --- Masukkan dusun apabila belum ada
+		$query = "SELECT id FROM tweb_wilayah WHERE kecamatan = ? AND dusun = ?";
+		$hasil = $this->db->query($query, array($isi_baris['kecamatan'], $isi_baris['dusun']));
+		$res = $hasil->row_array();
+		if (empty($res))
+		{
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', '".$isi_baris['dusun']."', 0, 0)";
+			$hasil = $this->db->query($query);
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', '".$isi_baris['dusun']."', 0, '-')";
+			$hasil = $this->db->query($query);
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', '".$isi_baris['dusun']."', '-', '-')";
+			$hasil = $this->db->query($query);
+			$isi_baris['id_cluster'] = $this->db->insert_id();
+		}
+		// --- Masukkan rw apabila belum ada
+		$query = "SELECT id FROM tweb_wilayah WHERE kecamatan = ? AND rw = ?";
+		$hasil = $this->db->query($query, array($isi_baris['kecamatan'], $isi_baris['rw']));
+		$res = $hasil->row_array();
+		if (empty($res))
+		{
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', '".$isi_baris['dusun']."', '".$isi_baris['rw']."', 0)";
+			$hasil = $this->db->query($query);
+			$query = "INSERT INTO tweb_wilayah(kecamatan, desa, dusun, rw, rt) VALUES ('".$isi_baris['kecamatan']."', '".$isi_baris['desa']."', '".$isi_baris['dusun']."', '".$isi_baris['rw']."', '-')";
 			$hasil = $this->db->query($query);
 			$isi_baris['id_cluster'] = $this->db->insert_id();
 		}
 
 		// --- Masukkan rt apabila belum ada
 		$query = "SELECT id FROM tweb_wilayah WHERE
-							dusun = '".$isi_baris['dusun']."' AND rw='".$isi_baris['rw']."' AND rt='".$isi_baris['rt']."'";
+							kecamatan = '".$isi_baris['kecamatan']."' AND desa = '".$isi_baris['desa']."' AND dusun = '".$isi_baris['dusun']."' AND rw='".$isi_baris['rw']."' AND rt='".$isi_baris['rt']."'";
 		$hasil = $this->db->query($query);
 		$res = $hasil->row_array();
 		if ( ! empty($res))
@@ -298,7 +336,7 @@ class Import_model extends CI_Model {
 		}
 		else
 		{
-			$query = "INSERT INTO tweb_wilayah(rt,rw,dusun) VALUES ('".$isi_baris['rt']."', '".$isi_baris['rw']."', '".$isi_baris['dusun']."')";
+			$query = "INSERT INTO tweb_wilayah(rt,rw,dusun,desa,kecamatan) VALUES ('".$isi_baris['rt']."', '".$isi_baris['rw']."', '".$isi_baris['dusun']."', '".$isi_baris['desa']."', '".$isi_baris['kecamatan']."')";
 			$hasil = $this->db->query($query);
 			$isi_baris['id_cluster'] = $this->db->insert_id();
 		}

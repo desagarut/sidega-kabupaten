@@ -23,10 +23,10 @@
   var map
   var gmaps
 
-  var daerah_kabupaten = <?=$wil_ini['path'] ?: 'null' ?>
+  var daerah_kecamatan = <?=$wil_ini['path'] ?: 'null' ?>
 
-  daerah_kabupaten && daerah_kabupaten[0].map((arr, i) => {
-    daerah_kabupaten[i] = { lat: arr[0], lng: arr[1] }
+  daerah_kecamatan && daerah_kecamatan[0].map((arr, i) => {
+    daerah_kecamatan[i] = { lat: arr[0], lng: arr[1] }
   })
 
   function initMap() {
@@ -56,7 +56,7 @@
     <?php if (!empty($wil_ini['path'])): ?>
       //Style polygon
       batasWilayah = new gmaps.Polygon({
-        paths: daerah_kabupaten,
+        paths: daerah_kecamatan,
         strokeColor: '#d10563',
         strokeOpacity: 1,
         strokeWeight: 3,
@@ -123,7 +123,7 @@
 
     // Create initial / last saved polygon
     batasWilayah = new gmaps.Polygon({
-      paths: daerah_kabupaten,
+      paths: daerah_kecamatan,
       strokeColor: '#d10563',
       strokeOpacity: 1,
       strokeWeight: 3,
@@ -178,8 +178,7 @@
         <?= $tautan['judul'] ?>
         </a></li>
       <?php endforeach; ?>
-      <li class="active">Peta
-        <?= $wilayah ?>
+      <li class="active">Peta <?= $wilayah ?>
       </li>
     </ol>
   </section>
@@ -199,23 +198,41 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <div class='col-sm-12'>
-          <label class="control-label col-sm-2">Warna blok</label>
-          <div class="col-sm-2">
-            <div class="input-group my-colorpicker2">
-              <input type="text" id="warna" name="warna" class="form-control input-sm required" placeholder="#FFFFFF" value="<?= $wil_ini['warna']?>">
-              <div class="input-group-addon input-sm"> <i></i> </div>
+        <div class="modal-footer">
+            <div class='col-sm-12'>
+            <div class="row col-sm-7">
+              <div class="form-group">
+                    <div class="col-md-6">
+                    <label class="col-sm-4 control-label "  for="lat">Lat: </label>
+                    <input type="text" class="col-md-6" name="lat" id="lat" value="<?= $wil_ini['lat']?>"/><br/>
+                    <label class="col-sm-4 control-label "  for="lng"> Lng: </label>
+                    
+                    <input type="text" class="col-md-6" name="lng" id="lng" value="<?= $wil_ini['lng']?>" /></div>
+                    <div class="col-sm-6">
+                    <label class="col-sm-4"  for="zoom"> Zoom: </label>
+                   
+                    <input type="text" class="col-md-6" width="5px" name="zoom" id="zoom" value="<?= $wil_ini['zoom']?>" /><br/>
+                    <label class="col-sm-4"  for="map_tipe"> Map Tipe: </label>
+                    
+                 <select class="input-sm pull-left" name="map_tipe" id="map_tipe">
+                    <option value="ROADMAP" <?php selected($map_tipe, 'ROADMAP'); ?>>ROADMAP</option>
+                    <option value="SATELLITE" <?php selected($map_tipe, 'SATELLITE'); ?>>SATELLITE</option>
+                    <option value="HYBRID" <?php selected($map_tipe, 'HYBRID'); ?>>HYBRID</option>
+                </select>
+                    <!-- <input type="text" class="col-md-6" width="5px" name="map_tipe" id="map_tipe" value="<?= $wil_ini['map_tipe']?>" />--></div>
+                </div>
             </div>
-          </div>
-          <?php if ($this->CI->cek_hak_akses('h')): ?>
-          <a href="<?= $tautan['link'] ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a> <a href="#" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" download="SIDeha.gpx" id="exportGPX"><i class='fa fa-download'></i> Export ke GPX</a>
-          <button type="reset" class="btn btn-social btn-box btn-danger btn-sm" data-dismiss="modal"><i class='fa fa-sign-out'></i> Tutup</button>
-          <!--<button type="submit" class="btn btn-social btn-box btn-info btn-sm" data-dismiss="modal" id="simpan_wilayah"><i class='fa fa-check'></i> Simpan</button>-->
-          <button type="submit" class="btn btn-social btn-box btn-info btn-sm"><i class='fa fa-check'></i> Simpan</button>
-          <?php endif; ?>
+                
+            <div class="row col-sm-5">
+                <a href="<?= site_url('identitas')?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali"><i class="fa fa-arrow-circle-o-left"></i> Kembali</a>
+                <?php if ($this->CI->cek_hak_akses('h')): ?>
+                <a href="#" class="btn btn-social btn-box btn-success btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" download="SIDeGa_Lokasi_Wilayah_<?php echo ucwords($kabupaten['nama_desa'])?>.gpx" id="exportGPX"><i class='fa fa-download'></i> Export ke GPX</a>
+                <button type="reset" class="btn btn-social btn-box btn-danger btn-sm" data-dismiss="modal"><i class='fa fa-sign-out'></i> Tutup</button>
+                <button type="submit" class="btn btn-social btn-box btn-info btn-sm"><i class='fa fa-check'></i> Simpan</button>
+                <?php endif; ?>
+            </div>
+            </div>
         </div>
-      </div>
     </form>
   </section>
 </div>

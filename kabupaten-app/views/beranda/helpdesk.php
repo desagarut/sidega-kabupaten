@@ -19,7 +19,7 @@
                         <strong>Klik </strong>salah satu icon di atas untuk menuju halaman login</i></p>
                         <p class="text-left">
                         <i>Email : </i> 
-                        	<strong class="pull-right"> <?= $setting_desa['email_desa']; ?></strong><br />
+                        	<strong class="pull-right"> <?= $setting_desa['email']; ?></strong><br />
                         <i>Password : </i>
                         	<strong class="pull-right">  @Desagarut.id</strong>
                         

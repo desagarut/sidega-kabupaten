@@ -2,10 +2,12 @@
 	<section class="content-header">
 		<h1>Pengelolaan Data RW</h1>
 		<ol class="breadcrumb">
-			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Beranda</a></li>
-			<li><a href="<?= site_url('sid_core')?>"> Daftar <?= ucwords($this->setting->sebutan_dusun)?></a></li>
-			<li><a href="<?= site_url("sid_core/sub_rw/$id_dusun")?>"> Daftar RW</a></li>
-			<li class="active">Data RW</li>
+			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Beranda</a></li>
+			<li><a href="<?= site_url('sid_core') ?>"> KAB.<?= $kabupaten['nama_kabupaten']?></a></li>
+			<li><a href="<?= site_url('sid_core/sub_desa') ?>"><?= $kecamatan ?></a></li>
+			<li><a href="<?= site_url('sid_core/sub_dusun') ?>"><?= $desa ?></a></li>
+			<li><a href="<?= site_url('sid_core/sub_rw') ?>"><?= $dusun ?></a></li>
+			<li class="active">Form RW</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">

@@ -486,12 +486,12 @@
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
-			<td><?= $config['nama_kepala_camat']; ?></td>
+			<td><?= $config['nama_camat']; ?></td>
 			<td><?= $input['pamong'] ?></td>
 			<td><?= $individu['nama'] ?></td>
 		</tr>
 		<tr>
-			<td>NIP : <?= $config['nip_kepala_camat']; ?></td>
+			<td>NIP : <?= $config['nip_camat']; ?></td>
 			<td></td>
 			<td></td>
 		</tr>

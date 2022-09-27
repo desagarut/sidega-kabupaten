@@ -2727,9 +2727,9 @@ class Database_model extends CI_Model {
 			$query = "ALTER TABLE config ADD nip_kepala_desa decimal(18,0)";
 			$this->db->query($query);
 		}
-		if (!$this->db->field_exists('email_desa', 'config'))
+		if (!$this->db->field_exists('email', 'config'))
 		{
-			$query = "ALTER TABLE config ADD email_desa varchar(50)";
+			$query = "ALTER TABLE config ADD email varchar(50)";
 			$this->db->query($query);
 		}
 		if (!$this->db->field_exists('telepon', 'config'))

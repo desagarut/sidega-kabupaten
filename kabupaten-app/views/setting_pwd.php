@@ -35,7 +35,7 @@
 							<a href="<?=site_url(); ?>"><img src="<?=gambar_kabupaten($header['logo']);?>" alt="<?=$header['nama_desa']?>" class="img-responsive" /></a>
 							<div class="login-footer-top"><h1><?=ucwords($this->setting->sebutan_desa)?> <?=$header['nama_desa']?></h1>
 								<h3>
-									<br /><?=$header['alamat_kantor']?><br />Kodepos <?=$header['kode_pos']?>
+									<br /><?=$header['alamat']?><br />Kodepos <?=$header['kode_pos']?>
 									<br /><?=ucwords($this->setting->sebutan_kecamatan)?> <?=$header['nama_kecamatan']?><br /><?=ucwords($this->setting->sebutan_kabupaten)?> <?=$header['nama_kabupaten']?>
 								</h3>
 							</div>

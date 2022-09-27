@@ -65,7 +65,7 @@
 								<h1>LAYANAN MANDIRI</h1>
 								<br /><h1><?=ucwords($this->setting->sebutan_desa)?> <?=$header['nama_desa']?></h1>
 								<h3>
-									<br /><?=$header['alamat_kantor']?><br />Kodepos <?=$header['kode_pos']?>
+									<br /><?=$header['alamat']?><br />Kodepos <?=$header['kode_pos']?>
 									<br /><?=ucwords($this->setting->sebutan_kecamatan)?> <?=$header['nama_kecamatan']?><br /><?=ucwords($this->setting->sebutan_kabupaten)?> <?=$header['nama_kabupaten']?>
 								</h3>
 							</div>

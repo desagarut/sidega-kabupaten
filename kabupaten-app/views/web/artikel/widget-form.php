@@ -37,7 +37,7 @@
 							</div>
 							<?php if ($widget['jenis_widget'] AND $widget['jenis_widget'] != 1 AND $widget['jenis_widget'] !=2) $dinamis = true; ?>
 							<div id="dinamis" class="form-group" <?php !$dinamis and print('style="display:none;"') ?>>
-								<label class="col-sm-4 control-label" for="alamat_kantor">Kode Widget</label>
+								<label class="col-sm-4 control-label" for="alamat">Kode Widget</label>
 								<div class="col-sm-6">
 									<textarea style="resize:none;height:150px;" id="isi-dinamis" name="isi-dinamis" class="form-control input-sm" placeholder="Kode Widget"><?=$widget['isi']?></textarea>
 								</div>

@@ -50,10 +50,10 @@
                             <h3>Alamat Kantor</h3>
                             <p class="phone">Phone: <?= $kabupaten['telepon']; ?></p>
                             <p class="mail">Email:
-                                <a href="mailto:<?= $kabupaten['email_desa']; ?>"><?= $kabupaten['email_desa']; ?></a>
+                                <a href="mailto:<?= $kabupaten['email']; ?>"><?= $kabupaten['email']; ?></a>
                             </p>
                             <p>Alamat:<br />
-                                <?= $kabupaten['alamat_kantor']; ?>
+                                <?= $kabupaten['alamat']; ?>
                             </p>
                         </div>
                         <!-- End Single Widget -->

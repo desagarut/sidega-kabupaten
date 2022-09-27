@@ -91,9 +91,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="alamat_kantor">Alamat Kantor </label>
+								<label class="col-sm-3 control-label" for="alamat">Alamat Kantor </label>
 								<div class="col-sm-8">
-									<textarea id="alamat_kantor" name="alamat_kantor" class="form-control input-sm alamat required" maxlength="100" placeholder="Alamat Kantor <?= $kabupaten; ?>" rows="3" style="resize:none;"><?= $main["alamat_kantor"]; ?></textarea>
+									<textarea id="alamat" name="alamat" class="form-control input-sm alamat required" maxlength="100" placeholder="Alamat Kantor <?= $kabupaten; ?>" rows="3" style="resize:none;"><?= $main["alamat"]; ?></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -103,9 +103,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="email_kabupaten">E-Mail </label>
+								<label class="col-sm-3 control-label" for="email">E-Mail </label>
 								<div class="col-sm-8">
-									<input id="email_kabupaten" name="email_kabupaten" class="form-control input-sm email" maxlength="50" type="text" placeholder="E-Mail <?= $kabupaten; ?>" value="<?= $main["email_kabupaten"]?>"></input>
+									<input id="email" name="email" class="form-control input-sm email" maxlength="50" type="text" placeholder="E-Mail <?= $kabupaten; ?>" value="<?= $main["email"]?>"></input>
 								</div>
 							</div>
 							<div class="form-group">

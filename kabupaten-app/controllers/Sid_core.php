@@ -83,12 +83,12 @@ class Sid_Core extends Admin_Controller {
 			$temp = $this->wilayah_model->cluster_by_id($id);
 			$data['kecamatan'] = $temp['kecamatan'];
 			$data['individu'] = $this->wilayah_model->get_penduduk($temp['id_kepala']);
-			$data['form_action'] = site_url("sid_core/update/$id");
+			$data['form_action'] = site_url("sid_core/update_kecamatan/$id");
 		}
 		else
 		{
 			$data['kecamatan'] = null;
-			$data['form_action'] = site_url("sid_core/insert");
+			$data['form_action'] = site_url("sid_core/insert_kecamatan");
 		}
 
 		$data['kecamatan_id'] = $this->wilayah_model->get_kecamatan_maps($id);
@@ -106,15 +106,15 @@ class Sid_Core extends Admin_Controller {
 	}
 
 	
-	public function insert()
+	public function insert_kecamatan()
 	{
-		$this->wilayah_model->insert();
+		$this->wilayah_model->insert_kecamatan();
 		redirect('sid_core');
 	}
 
-	public function update($id = '')
+	public function update_kecamatan($id = '')
 	{
-		$this->wilayah_model->update($id);
+		$this->wilayah_model->update_kecamatan($id);
 		redirect('sid_core');
 	}
 	//Delete kecamatan/desa/dusun/rw/rt tergantung tipe
@@ -144,7 +144,7 @@ public function cetak_desa($id_kecamatan = '')
 {
 	$kecamatan = $this->wilayah_model->cluster_by_id($id_kecamatan);
 	$nama_kecamatan = $kecamatan['kecamatan'];
-	$data['dusun'] = $kecamatan['kecamatan'];
+	$data['kecamatan'] = $kecamatan['kecamatan'];
 	$data['id_kecamatan'] = $id_kecamatan;
 	$data['main'] = $this->wilayah_model->list_data_desa($id_kecamatan );
 	$data['total'] = $this->wilayah_model->total_desa($nama_kecamatan );
@@ -162,6 +162,7 @@ public function excel_desa($id_kecamatan = '', $id_desa = '')
 	$temp = $this->wilayah_model->cluster_by_id($id_desa);
 	$desa = $temp['desa'];
 	$data['desa'] = $desa;
+	
 	$data['main'] = $this->wilayah_model->list_data_desa($kecamatan, $desa);
 	$data['total'] = $this->wilayah_model->total_desa($kecamatan, $desa);
 
@@ -213,14 +214,15 @@ public function sub_dusun($id_kecamatan = '', $id_desa = '')
 {
 	$temp = $this->wilayah_model->cluster_by_id($id_kecamatan);
 	$kecamatan = $temp['kecamatan'];
+	$desa = $temp['desa'];
 	$data['kecamatan'] = $temp['kecamatan'];
 	$data['id_kecamatan'] = $id_kecamatan;
-
+	
 	$data_desa = $this->wilayah_model->cluster_by_id($id_desa);
 	$data['desa'] = $data_desa['desa'];
 	$data['id_desa'] = $id_desa;
 
-	$data['main'] = $this->wilayah_model->list_data_dusun($kecamatan, $data['desa']);
+	$data['main'] = $this->wilayah_model->list_data_dusun($kecamatan,$data['desa']);
 	$data['total'] = $this->wilayah_model->total_dusun($kecamatan, $data['desa']);
 
 	$this->render('sid/wilayah/wilayah_dusun', $data);
@@ -242,6 +244,7 @@ public function excel_dusun($id_kecamatan = '')
 {
 	$kecamatan = $this->wilayah_model->cluster_by_id($id_kecamatan);
 	$nama_kecamatan = $kecamatan['kecamatan'];
+	$data['desa'] = $kecamatan['desa'];
 	$data['dusun'] = $kecamatan['kecamatan'];
 	$data['id_kecamatan'] = $id_kecamatan;
 	$data['main'] = $this->wilayah_model->list_data_dusun($id_kecamatan );
@@ -254,12 +257,13 @@ public function form_dusun($id_kecamatan = '', $id_desa = '', $id_dusun = '')
 {
 	$temp = $this->wilayah_model->cluster_by_id($id_kecamatan);
 	$kecamatan = $temp['kecamatan'];
+	$desa = $temp['desa'];
 	$data['kecamatan'] = $temp['kecamatan'];
-	
 	$data['id_kecamatan'] = $id_kecamatan;
-	$data['desa'] = $temp['desa'];
+	
+	$data_desa = $this->wilayah_model->cluster_by_id($id_desa);
+	$data['desa'] = $data_desa['desa'];
 	$data['id_desa'] = $id_desa;
-
 
 	$data['penduduk'] = $this->wilayah_model->list_penduduk();
 
@@ -274,19 +278,19 @@ public function form_dusun($id_kecamatan = '', $id_desa = '', $id_dusun = '')
 	else
 	{
 		$data['dusun'] = NULL;
-		$data['form_action'] = site_url("sid_core/insert_dusun/$id_kecamatan");
+		$data['form_action'] = site_url("sid_core/insert_dusun/$id_kecamatan/$id");
 	}
 
-	$this->render('sid/wilayah/wilayah_form_dusun', $data);
+	$this->render('sid/wilayah/wilayah_dusun_form', $data);
 }
 
-public function insert_dusun($kecamatan = '')
+public function insert_dusun($id_kecamatan = '', $id_desa = '')
 {
-	$this->wilayah_model->insert_dusun($kecamatan);
-	redirect("sid_core/sub_dusun/$kecamatan");
+	$this->wilayah_model->insert_dusun($id_kecamatan, $id_desa);
+	redirect("sid_core/sub_dusun/$id_kecamatan/$id_desa");
 }
 
-public function update_dusun($kecamatan = '', $id_dusun = '')
+public function update_dusun($kecamatan = '', $desa = '', $dusun = '')
 {
 	$this->wilayah_model->update_dusun($id_dusun);
 	redirect("sid_core/sub_dusun/$kecamatan");
@@ -297,29 +301,24 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 	//DATA RW
 	public function sub_rw($id_kecamatan = '', $id_desa = '', $id_dusun = '')
 	{
-		$temp = $this->wilayah_model->cluster_by_id($id_kecamatan);
-		$kecamatan = $temp['kecamatan'];
-		$data['kecamatan'] = $temp['kecamatan'];
-		$data['id_kecamatan'] = $id_kecamatan;
+	$temp = $this->wilayah_model->cluster_by_id($id_kecamatan);
+	$kecamatan = $temp['kecamatan'];
+	$desa = $temp['desa'];
+	$data['kecamatan'] = $temp['kecamatan'];
+	$data['id_kecamatan'] = $id_kecamatan;
+	
+	$data_desa = $this->wilayah_model->cluster_by_id($id_desa);
+	$data['desa'] = $data_desa['desa'];
+	$data['id_desa'] = $id_desa;
+	
+	$data_dusun = $this->wilayah_model->cluster_by_id($id_dusun);
+	$data['dusun'] = $data_dusun['dusun'];
+	$data['id_dusun'] = $id_dusun;
 
-		$temp = $this->wilayah_model->cluster_by_id($id_desa);
-		$desa = $temp['desa'];
-		$data['desa'] = $temp['desa'];
-		$data['id_desa'] = $id_desa;
-		
-		$temp = $this->wilayah_model->cluster_by_id($id_dusun);
-		$dusun = $temp['dusun'];
-		$data['dusun'] = $temp['dusun'];
-		$data['id_dusun'] = $id_dusun;
+	$data['main'] = $this->wilayah_model->list_data_rw($kecamatan,$data['dusun']);
+	$data['total'] = $this->wilayah_model->total_rw($kecamatan, $data['dusun']);
 
-		$data_rw = $this->wilayah_model->cluster_by_id($id_rw);
-		$data['rw'] = $data_rw['rw'];
-		$data['id_rw'] = $id_rw;
-
-		$data['main'] = $this->wilayah_model->list_data_rw($id_kecamatan );
-		$data['total'] = $this->wilayah_model->total_rw($nama_kecamatan );
-
-		$this->render('sid/wilayah/wilayah_rw', $data);
+	$this->render('sid/wilayah/wilayah_rw', $data);
 	}
 
 	public function cetak_rw($id_kecamatan = '')
@@ -352,6 +351,14 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 		$kecamatan = $temp['kecamatan'];
 		$data['kecamatan'] = $temp['kecamatan'];
 		$data['id_kecamatan'] = $id_kecamatan;
+		
+		$data_desa = $this->wilayah_model->cluster_by_id($id_desa);
+		$data['desa'] = $data_desa['desa'];
+		$data['id_desa'] = $id_desa;
+
+		$data_dusun = $this->wilayah_model->cluster_by_id($id_dusun);
+		$data['dusun'] = $data_dusun['dusun'];
+		$data['id_dusun'] = $id_dusun;
 
 		$data['penduduk'] = $this->wilayah_model->list_penduduk();
 
@@ -369,7 +376,7 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 			$data['form_action'] = site_url("sid_core/insert_rw/$id_kecamatan");
 		}
 
-		$this->render('sid/wilayah/wilayah_form_rw', $data);
+		$this->render('sid/wilayah/wilayah_rw_form', $data);
 	}
 
 	public function insert_rw($kecamatan = '')
@@ -522,25 +529,29 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 		$_SESSION['sex'] = 2;
 		redirect("penduduk/index/1/0");
 	}
+	
+// Start Pemetaan Wilayah Kecamatan
 
-	public function ajax_kantor_dusun_maps_google($id = '')
+	public function ajax_kantor_kecamatan_maps_google($id = '')
 
 	{
 
-		$sebutan_deskel = ucwords($this->setting->sebutan_deskel);
+		$sebutan_kabupaten = ucwords($this->setting->sebutan_kabupaten);
 		$data['wil_atas'] = $this->config_model->get_data();
-		$data['wil_ini'] = $this->wilayah_model->get_dusun_maps($id);
+		$data['wil_ini'] = $this->wilayah_model->get_kecamatan_maps($id);
+		$data['kecamatan_gis'] = $this->wilayah_model->list_kecamatan_gis();
+		$data['desa_gis'] = $this->wilayah_model->list_dusun_gis();
 		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
 		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
 		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
 
-		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['dusun']." ".$sebutan_deskel." ".$data['wil_atas']['nama_deskel']);
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['kecamatan']." ".$sebutan_kabupaten." ".$data['wil_atas']['nama_kabupaten']);
 		$data['wilayah'] = ucwords($this->setting->sebutan_wilayah);
 		$data['breadcrumb'] = array(
 			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
 		);
-		$data['form_action'] = site_url("sid_core/update_kantor_dusun_map/$id");
-		$namadesa =  $data['wil_atas']['nama_deskel'];
+		$data['form_action'] = site_url("sid_core/update_kantor_kecamatan_map/$id");
+		$nama_kabupaten =  $data['wil_atas']['nama_kabupaten'];
 		$data['logo'] = $this->config_model->get_data();
 
 		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
@@ -550,7 +561,237 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 		else
 		{
 			$_SESSION['success'] = -1;
-			$_SESSION['error_msg'] = "Lokasi Kantor $sebutan_deskel $nama_deskel Belum Dilengkapi";
+			$_SESSION['error_msg'] = "Lokasi Kantor $sebutan_kabupaten $nama_kabupaten Belum Dilengkapi";
+			redirect("sid_core", $data);
+		}
+	}
+
+	public function ajax_wilayah_kecamatan_openstreet_maps($id = '')
+	{
+		$sebutan_kabupaten = ucwords($this->setting->sebutan_kabupaten);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['wil_ini'] = $this->wilayah_model->get_kecamatan_maps($id);
+		$data['kecamatan_gis'] = $this->wilayah_model->list_kecamatan();
+		$data['desa_gis'] = $this->wilayah_model->list_desa();
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_kecamatan." ".$data['wil_ini']['kecamatan']." ".$sebutan_kabupaten." ".$data['wil_atas']['nama_kabupaten']);
+		$data['wilayah'] = ucwords($this->setting->sebutan_kecamatan);
+		$data['breadcrumb'] = array(
+			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
+		);
+		$data['form_action'] = site_url("sid_core/update_wilayah_kecamatan_map/$id");
+		$nama_kabupaten =  $data['wil_atas']['nama_kabupaten'];
+		$data['logo'] = $this->config_model->get_data();
+		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
+		{
+			$this->render("sid/wilayah/maps_openstreet_wilayah", $data);
+		}
+		else
+		{
+			$_SESSION['success'] = -1;
+			$_SESSION['error_msg'] = "Peta Lokasi/Wilayah $sebutan_kabupaten $nama_kabupaten Belum Dilengkapi";
+			redirect("sid_core");
+		}
+	}
+	
+	public function ajax_wilayah_kecamatan_maps_google($id = '')
+	{
+		$sebutan_kabupaten = ucwords($this->setting->sebutan_kabupaten);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['wil_ini'] = $this->wilayah_model->get_kecamatan_maps($id);
+		$data['kecamatan_gis'] = $this->wilayah_model->list_kecamatan_gis();
+		$data['desa_gis'] = $this->wilayah_model->list_desa_gis();
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['kecamatan']." ".$sebutan_kabupaten." ".$data['wil_atas']['nama_kabupaten']);
+		$data['wilayah'] = ucwords($this->setting->sebutan_wilayah);
+		$data['breadcrumb'] = array(
+			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
+		);
+		$data['form_action'] = site_url("sid_core/update_wilayah_kecamatan_map/$id");
+		$nama_kabupaten =  $data['wil_atas']['nama_kabupaten'];
+		$data['logo'] = $this->config_model->get_data();
+		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
+		{
+			$this->render("sid/wilayah/maps_google_wilayah", $data);
+		}
+		else
+		{
+			$_SESSION['success'] = -1;
+			$_SESSION['error_msg'] = "Peta Lokasi/Wilayah $sebutan_kabupaten $nama_kabupaten Belum Dilengkapi";
+			redirect("sid_core");
+		}
+	}
+
+	public function update_kantor_kecamatan_map($id = '')
+	{
+		$sebutan_kecamatan = ucwords($this->setting->sebutan_kecamatan);
+		$nama_kecamatan =  $this->input->post('kecamatan');
+		$id_kecamatan =  $this->input->post('id');
+
+		$this->wilayah_model->update_kantor_kecamatan_map($id);
+		redirect("sid_core");
+	}
+
+	public function update_wilayah_kecamatan_map($id = '')
+	{
+		$sebutan_kecamatan = ucwords($this->setting->sebutan_dusun);
+		$nama_kecamatan =  $this->input->post('kecamatan');
+		$id_kecamatan =  $this->input->post('id');
+
+		$this->wilayah_model->update_wilayah_kecamatan_map($id);
+		redirect("sid_core");
+	}
+
+
+// End Pemetaan Wilayah Kecamatan	
+
+// Start Pemetaan Desa
+	
+	public function ajax_kantor_desa_maps_google($id = '')
+
+	{
+
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['wil_ini'] = $this->wilayah_model->get_dusun_maps($id);
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['dusun']." ".$sebutan_desa." ".$data['wil_atas']['nama_desa']);
+		$data['wilayah'] = ucwords($this->setting->sebutan_wilayah);
+		$data['breadcrumb'] = array(
+			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
+		);
+		$data['form_action'] = site_url("sid_core/update_kantor_desa_map/$id");
+		$namadesa =  $data['wil_atas']['nama_desa'];
+		$data['logo'] = $this->config_model->get_data();
+
+		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
+		{
+			$this->render("sid/wilayah/maps_google_kantor", $data);
+		}
+		else
+		{
+			$_SESSION['success'] = -1;
+			$_SESSION['error_msg'] = "Lokasi Kantor $sebutan_desa $nama_desa Belum Dilengkapi";
+			redirect("sid_core", $data);
+		}
+	}
+	
+	public function ajax_wilayah_desa_openstreet_maps($id = '')
+	{
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['wil_ini'] = $this->wilayah_model->get_dusun_maps($id);
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_dusun." ".$data['wil_ini']['dusun']." ".$sebutan_desa." ".$data['wil_atas']['nama_desa']);
+		$data['wilayah'] = ucwords($this->setting->sebutan_dusun);
+		$data['breadcrumb'] = array(
+			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
+		);
+		$data['form_action'] = site_url("sid_core/update_wilayah_desa_map/$id");
+		$namadesa =  $data['wil_atas']['nama_desa'];
+		$data['logo'] = $this->config_model->get_data();
+		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
+		{
+			$this->render("sid/wilayah/maps_openstreet_wilayah", $data);
+		}
+		else
+		{
+			$_SESSION['success'] = -1;
+			$_SESSION['error_msg'] = "Peta Lokasi/Wilayah $sebutan_desa $namadesa Belum Dilengkapi";
+			redirect("sid_core");
+		}
+	}
+
+	public function ajax_wilayah_desa_maps_google($id = '')
+	{
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['wil_ini'] = $this->wilayah_model->get_dusun_maps($id);
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['dusun']." ".$sebutan_desa." ".$data['wil_atas']['nama_desa']);
+		$data['wilayah'] = ucwords($this->setting->sebutan_wilayah);
+		$data['breadcrumb'] = array(
+			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
+		);
+		$data['form_action'] = site_url("sid_core/update_wilayah_dusun_map/$id");
+		$nama_desa =  $data['wil_atas']['nama_desa'];
+		$data['logo'] = $this->config_model->get_data();
+		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
+		{
+			$this->render("sid/wilayah/maps_google_wilayah", $data);
+		}
+		else
+		{
+			$_SESSION['success'] = -1;
+			$_SESSION['error_msg'] = "Peta Lokasi/Wilayah $sebutan_desa $namadesa Belum Dilengkapi";
+			redirect("sid_core");
+		}
+	}
+
+	public function update_kantor_desa_map($id = '')
+	{
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$nama_desa =  $this->input->post('desa');
+		$id_desa =  $this->input->post('id');
+
+		$this->wilayah_model->update_kantor_desa_map($id);
+		redirect("sid_core");
+	}
+
+	public function update_wilayah_desa_map($id = '')
+	{
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$nama_desa =  $this->input->post('desa');
+		$id_desa =  $this->input->post('id');
+
+		$this->wilayah_model->update_wilayah_desa_map($id);
+		redirect("sid_core");
+	}
+
+// End Pemetaan Desa
+
+
+// Start Pemetaan Dusun
+	
+	public function ajax_kantor_dusun_maps_google($id = '')
+
+	{
+
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
+		$data['wil_atas'] = $this->config_model->get_data();
+		$data['wil_ini'] = $this->wilayah_model->get_dusun_maps($id);
+		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
+		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
+		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
+
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['dusun']." ".$sebutan_desa." ".$data['wil_atas']['nama_desa']);
+		$data['wilayah'] = ucwords($this->setting->sebutan_wilayah);
+		$data['breadcrumb'] = array(
+			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
+		);
+		$data['form_action'] = site_url("sid_core/update_kantor_dusun_map/$id");
+		$namadesa =  $data['wil_atas']['nama_desa'];
+		$data['logo'] = $this->config_model->get_data();
+
+		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
+		{
+			$this->render("sid/wilayah/maps_google_kantor", $data);
+		}
+		else
+		{
+			$_SESSION['success'] = -1;
+			$_SESSION['error_msg'] = "Lokasi Kantor $sebutan_desa $nama_desa Belum Dilengkapi";
 			redirect("sid_core", $data);
 		}
 	}
@@ -585,19 +826,19 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 
 	public function ajax_wilayah_dusun_maps_google($id = '')
 	{
-		$sebutan_deskel = ucwords($this->setting->sebutan_deskel);
+		$sebutan_desa = ucwords($this->setting->sebutan_desa);
 		$data['wil_atas'] = $this->config_model->get_data();
 		$data['wil_ini'] = $this->wilayah_model->get_dusun_maps($id);
 		$data['dusun_gis'] = $this->wilayah_model->list_dusun();
 		$data['rw_gis'] = $this->wilayah_model->list_rw_gis();
 		$data['rt_gis'] = $this->wilayah_model->list_rt_gis();
-		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['dusun']." ".$sebutan_deskel." ".$data['wil_atas']['nama_deskel']);
+		$data['nama_wilayah'] = ucwords($this->setting->sebutan_wilayah." ".$data['wil_ini']['dusun']." ".$sebutan_desa." ".$data['wil_atas']['nama_desa']);
 		$data['wilayah'] = ucwords($this->setting->sebutan_wilayah);
 		$data['breadcrumb'] = array(
 			array('link' => site_url('sid_core'), 'judul' => "Daftar ".$data['wilayah']),
 		);
 		$data['form_action'] = site_url("sid_core/update_wilayah_dusun_map/$id");
-		$nama_deskel =  $data['wil_atas']['nama_deskel'];
+		$nama_desa =  $data['wil_atas']['nama_desa'];
 		$data['logo'] = $this->config_model->get_data();
 		if (!empty($data['wil_atas']['lat'] && !empty($data['wil_atas']['lng'] && !empty($data['wil_atas']['path']))))
 		{
@@ -606,7 +847,7 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 		else
 		{
 			$_SESSION['success'] = -1;
-			$_SESSION['error_msg'] = "Peta Lokasi/Wilayah $sebutan_deskel $namadesa Belum Dilengkapi";
+			$_SESSION['error_msg'] = "Peta Lokasi/Wilayah $sebutan_desa $namadesa Belum Dilengkapi";
 			redirect("sid_core");
 		}
 	}
@@ -630,6 +871,8 @@ public function update_dusun($kecamatan = '', $id_dusun = '')
 		$this->wilayah_model->update_wilayah_dusun_map($id);
 		redirect("sid_core");
 	}
+
+// End Pemetaan Dusun
 
 	public function ajax_kantor_rw_google_maps($id_kecamatan = '', $id_rw = '')
 	{

@@ -17,7 +17,7 @@
 		</p>
 		<p>
 			Jika ada keperluan yang mendesak silakan langsung datang ke Kantor <?= ucwords($this->setting->sebutan_deskel)?>.<br>
-			Alamat : <?= $main['alamat_kantor'] ?><br>
+			Alamat : <?= $main['alamat'] ?><br>
 			Email : <?= $main['email_deskel'] ?><br>
 			Telepon : <?= $main['Telepon'] ?>
 		</p>

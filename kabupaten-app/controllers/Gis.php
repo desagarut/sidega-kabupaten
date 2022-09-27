@@ -99,7 +99,7 @@ class Gis extends Admin_Controller {
 		$data['list_jenis_kelamin'] = $this->referensi_model->list_data('tweb_penduduk_sex');
 		
 		$this->set_minsidebar(1);
-		$this->render('gis/maps-openstreet', $data);
+		$this->render('gis/maps-osm', $data);
 	}
 
 	public function search()

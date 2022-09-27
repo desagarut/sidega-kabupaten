@@ -15,7 +15,7 @@
             <?= ucfirst($this->setting->sebutan_desa).' '.ucwords($kabupaten['nama_desa']) ?>
           </h3>
           <p>
-            <?= $kabupaten['alamat_kantor']; ?>
+            <?= $kabupaten['alamat']; ?>
             <br>
             Kecamatan
             <?= $kabupaten['nama_kecamatan']; ?>

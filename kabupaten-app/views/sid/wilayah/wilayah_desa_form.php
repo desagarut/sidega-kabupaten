@@ -46,7 +46,7 @@
 											<?php if ($desa) : ?>
 												<div class="col-sm-12">
 													<div class="form-group">
-														<label class="col-sm-3 control-label" for="kepala_lama">Kepala Desa Sebelumnya</label>
+														<label class="col-sm-3 control-label" for="kepala_lama">Kades / Lurah Sebelumnya</label>
 														<div class="col-sm-7">
 															<p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
 																<strong><?= $individu["nama"] ?></strong>

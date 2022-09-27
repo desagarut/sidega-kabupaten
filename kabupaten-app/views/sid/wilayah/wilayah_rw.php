@@ -1,10 +1,13 @@
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Wilayah Administratif RW</h1>
+		<h1>WILAYAH DUSUN <?= $dusun ?></h1>
 		<ol class="breadcrumb">
-			<li><a href="<?= site_url('beranda')?>"><i class="fa fa-home"></i> Beranda</a></li>
-			<li><a href="<?= site_url('sid_core')?>"> Daftar <?= ucwords($this->setting->sebutan_dusun)?></a></li>
-			<li class="active">Daftar RW</li>
+			<li><a href="<?= site_url('beranda') ?>"><i class="fa fa-home"></i> Beranda</a></li>
+			<li><a href="<?= site_url('sid_core') ?>"> KAB.<?= $kabupaten['nama_kabupaten']?></a></li>
+			<li><a href="<?= site_url('sid_core/sub_desa') ?>"><?= $kecamatan ?></a></li>
+			<li><a href="<?= site_url('sid_core/sub_dusun') ?>"><?= $desa ?></a></li>
+			<li><a href="<?= site_url('sid_core/sub_rw') ?>"><?= $dusun ?></a></li>
+			<li class="active">Data RW</li>
 		</ol>
 	</section>
 	<section class="content" id="maincontent">
@@ -17,12 +20,13 @@
 						<?php endif; ?>
                         <a href="<?= site_url("sid_core/cetak_rw/$id_dusun")?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Cetak Data" target="_blank"><i class="fa fa-print "></i> Cetak</a>
 						<a href="<?= site_url("sid_core/excel_rw/$id_dusun")?>" class="btn btn-social btn-box bg-navy btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Unduh Data" target="_blank"><i class="fa fa-download"></i> Unduh</a>
-						<a href="<?= site_url("sid_core")?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar RW">
+						<a href="<?= site_url("sid_core/sub_dusun/$id_kecamatan/$id_desa/$id_dusun")?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Daftar RW">
 							<i class="fa fa-arrow-circle-left "></i>Kembali ke Daftar <?= ucwords($this->setting->sebutan_dusun)?>
 						</a>
 					</div>
 					<div class="box-header with-border">
-						<strong><?= ucwords($this->setting->sebutan_dusun)?> <?= $dusun?></strong>
+						<h4 class="text-center">DATA RW DUSUN <?= $dusun ?> DESA/KELURAHAN <?= $desa ?><br/>
+						 <?= strtoupper($this->setting->sebutan_kecamatan) ?> <?= $kecamatan ?> <?= strtoupper($this->setting->sebutan_kabupaten) ?> <?= $kabupaten['nama_kabupaten']?> </h4>
 					</div>
 					<div class="box-body">
 						<div class="row">

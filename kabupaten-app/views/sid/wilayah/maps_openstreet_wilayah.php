@@ -29,8 +29,7 @@
         <?= $tautan['judul'] ?>
         </a></li>
       <?php endforeach; ?>
-      <li class="active">Peta Wilayah
-        <?= $wilayah ?>
+      <li class="active">Peta Wilayah <?= $wilayah ?>
       </li>
     </ol>
   </section>
@@ -90,13 +89,25 @@
 
 		//1. Menampilkan overlayLayers Peta Semua Wilayah
 		var marker_kabupaten = [];
+		var marker_kecamatan = [];
+		var marker_desa = [];
 		var marker_dusun = [];
 		var marker_rw = [];
 		var marker_rt = [];
 
+		//OVERLAY WILAYAH KABUPATEN
+		<?php if (!empty($kabupaten_gis['path'])): ?>
+			set_marker_kabupaten(marker_kabupaten, <?=json_encode($kabupaten_gis)?>, "<?=ucwords($this->setting->sebutan_kabupaten).' '.$kabupaten['nama_kabupaten']?>", "<?= favico_kabupaten()?>");
+		<?php endif; ?>
+
+		//OVERLAY WILAYAH KECAMATAN
+		<?php if (!empty($kecamatan_gis)): ?>
+			set_marker(marker_kecamatan, '<?=addslashes(json_encode($kecamatan_gis))?>', '<?=ucwords($this->setting->sebutan_kecamatan)?>', 'kecamatan', "<?= favico_kabupaten()?>");
+		<?php endif; ?>
+
 		//OVERLAY WILAYAH DESA
-		<?php if (!empty($kabupaten['path'])): ?>
-			set_marker_kabupaten(marker_kabupaten, <?=json_encode($kabupaten)?>, "<?=ucwords($this->setting->sebutan_desa).' '.$kabupaten['nama_desa']?>", "<?= favico_kabupaten()?>");
+		<?php if (!empty($desa_gis)): ?>
+			set_marker(marker_desa, '<?=addslashes(json_encode($desa_gis))?>', '<?=ucwords($this->setting->sebutan_desa)?>', 'desa', "<?= favico_kabupaten()?>");
 		<?php endif; ?>
 
 		//OVERLAY WILAYAH DUSUN
@@ -116,7 +127,7 @@
 
 		//Menampilkan overlayLayers Peta Semua Wilayah
 		<?php if (!empty($wil_atas['path'])): ?>
-	    var overlayLayers = overlayWil(marker_kabupaten, marker_dusun, marker_rw, marker_rt, "<?=ucwords($this->setting->sebutan_desa)?>", "<?=ucwords($this->setting->sebutan_dusun)?>");
+	    var overlayLayers = overlayWil(marker_kabupaten, marker_kecamatan, marker_desa, marker_dusun, marker_rw, marker_rt, "<?=ucwords($this->setting->sebutan_kabupaten)?>", "<?=ucwords($this->setting->sebutan_kecamatan)?>, "<?=ucwords($this->setting->sebutan_desa)?>, "<?=ucwords($this->setting->sebutan_dusun)?>");
 		<?php else: ?>
 			var overlayLayers = {};
 		<?php endif; ?>

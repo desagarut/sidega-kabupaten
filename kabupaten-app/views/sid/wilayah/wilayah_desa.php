@@ -64,19 +64,19 @@
 																<tr>
 																	<td class="no_urut"><?= $data['no'] ?></td>
 																	<td nowrap>
-																		<a href="<?= site_url("sid_core/sub_dusun/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Rincian Wilayah Kecamatan"><i class="fa fa-search"></i> Detail</a>
+																		<a href="<?= site_url("sid_core/sub_dusun/$id_kecamatan/$data[id]") ?>" class="btn bg-purple btn-box btn-sm" title="Rincian Wilayah Kecamatan"><i class="fa fa-search"></i> Detail</a>
 																		<?php if ($this->CI->cek_hak_akses('h')) : ?>
-																			<a href="<?= site_url("sid_core/form_desa/$data[id]") ?>" class="btn bg-orange btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
-																			<a href="#" data-href="<?= site_url("sid_core/delete/dusun/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-																			<a href="<?= site_url("sid_core/ajax_kantor_dusun_maps_google/$data[id]") ?>" class="btn btn-info btn-box btn-sm" title="Lokasi Kantor"><i class="fa fa-map-marker"></i></a>
-																			<a href="<?= site_url("sid_core/ajax_wilayah_dusun_maps_google/$data[id]") ?>" class="btn btn-primary btn-box btn-sm" title="Peta Google"><i class="fa fa-google"></i></a>
-																			<a href="<?= site_url("sid_core/ajax_wilayah_dusun_openstreet_maps/$data[id]") ?>" class="btn btn-info btn-box btn-sm" title="Peta Openstreet"><i class="fa fa-map-o"></i></a>
+																			<a href="<?= site_url("sid_core/form_desa/$id_kecamatan/$id_desa/$data[id]") ?>" class="btn bg-orange btn-box btn-sm" title="Ubah"><i class="fa fa-edit"></i></a>
+																			<a href="#" data-href="<?= site_url("sid_core/delete/desa/$data[id]") ?>" class="btn bg-maroon btn-box btn-sm" title="Hapus" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+																			<a href="<?= site_url("sid_core/ajax_kantor_desa_maps_google/$data[id]") ?>" class="btn btn-info btn-box btn-sm" title="Lokasi Kantor"><i class="fa fa-map-marker"></i></a>
+																			<a href="<?= site_url("sid_core/ajax_wilayah_desa_maps_google/$data[id]") ?>" class="btn btn-primary btn-box btn-sm" title="Peta Google"><i class="fa fa-google"></i></a>
+																			<a href="<?= site_url("sid_core/ajax_wilayah_desa_openstreet_maps/$data[id]") ?>" class="btn btn-info btn-box btn-sm" title="Peta Openstreet"><i class="fa fa-map-o"></i></a>
 																		<?php endif; ?>
 																	</td>
 																	<td><?= strtoupper($data['desa']) ?></td>
-																	<td nowrap><strong><?= strtoupper($data['nama_kades']) ?></strong> - <?= $data['nik_kades'] ?></td>
+																	<td nowrap><strong><?= strtoupper($data['nama_kepala']) ?></strong> - <?= $data['nik_kepala'] ?></td>
 																	<td class="bilangan"><a href="<?= site_url("sid_core/sub_dusun/$data[id]") ?>" title="Rincian Wilayah Dusun"><?= $data['jumlah_dusun'] ?></a></td>
-																	<td class="bilangan"><a href="<?= site_url("sid_core/sub_rw/$data[id]") ?>" title="Rincian Sub Wilayah RW"><?= $data['jumlah_rw'] ?></a></td>
+																	<td class="bilangan"><a href="<?= site_url("sid_core/sub_dusun/$data[id]") ?>" title="Rincian Sub Wilayah Dusun"><?= $data['jumlah_rw'] ?></a></td>
 																	<td class="bilangan"><?= $data['jumlah_rt'] ?></td>
 																	<td class="bilangan"><a href="<?= site_url("sid_core/warga_kk/$data[id]") ?>"><?= $data['jumlah_kk'] ?></a></td>
 																	<td class="bilangan"><a href="<?= site_url("sid_core/warga/$data[id]") ?>"><?= $data['jumlah_warga'] ?></a></td>

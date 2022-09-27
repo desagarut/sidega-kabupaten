@@ -985,7 +985,7 @@
 		$buffer = str_replace("prop","\caps $h[nama_propinsi]", $buffer);
 		$buffer = str_replace("kab","\caps $h[nama_kabupaten]", $buffer);
 		$buffer = str_replace("kec","\caps $h[nama_kecamatan]", $buffer);
-		$buffer = str_replace("*camat","\caps $h[nama_kepala_camat]", $buffer);
+		$buffer = str_replace("*camat","\caps $h[nama_camat]", $buffer);
 		$buffer = str_replace("*kades","\caps $h[nama_kepala_desa]", $buffer);
 		$buffer = str_replace("*rt","$k[rt]", $buffer);
 		$buffer = str_replace("*rw","$k[rw]", $buffer);
@@ -993,7 +993,7 @@
 		$buffer = str_replace("no_kk","$k[no_kk]", $buffer);
 		$buffer = str_replace("pos","$h[kode_pos]", $buffer);
 		$buffer = str_replace("*tertanda","\caps $tertanda", $buffer);
-		$buffer = str_replace("*nip_camat","$h[nip_kepala_camat]", $buffer);
+		$buffer = str_replace("*nip_camat","$h[nip_camat]", $buffer);
 
 		$berkas_arsip = $path_arsip."kk_$k[no_kk].rtf";
 		$handle = fopen($berkas_arsip, 'w+');

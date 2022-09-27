@@ -107,6 +107,8 @@ class Database extends Admin_Controller {
 
 		//Header Tabel
 		$daftar_kolom = [
+			['Kecamatan', 'kecamatan'],
+			['Desa', 'desa'],
 			['Alamat', 'alamat'],
 			['Dusun', 'dusun'],
 			['RW', 'rw'],
@@ -169,6 +171,8 @@ class Database extends Admin_Controller {
 			foreach ($get as $row)
 			{
 				$penduduk = array(
+					$row->kecamatan,
+					$row->desa,
 					$row->alamat,
 					$row->dusun,
 					$row->rw,
@@ -234,6 +238,8 @@ class Database extends Admin_Controller {
 			foreach ($get as $row)
 			{
 				$penduduk = array(
+					$row->kecamatan,
+					$row->desa,
 					$row->alamat,
 					$row->dusun,
 					$row->rw,

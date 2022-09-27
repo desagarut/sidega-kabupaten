@@ -50,12 +50,12 @@
                   <?= $kabupaten; ?>
                 </a>
                 <!--<a href="<?= site_url('identitas/maps/kantor'); ?>" class="btn btn-social btn-box bg-purple btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class='fa fa-map-marker'></i> Lokasi Kantor <?= $kabupaten; ?></a>-->
-                <a href="<?= site_url('identitas/maps/kantor'); ?>" class="btn btn-social btn-box btn-info btn-sm" title="Ubah Lokasi Kantor Desa"><i class='fa fa-map-marker'></i> Lokasi Kantor
+                <a href="<?= site_url('identitas/gmaps_kantor'); ?>" class="btn btn-social btn-box btn-info btn-sm" title="Ubah Lokasi Kantor Desa"><i class='fa fa-map-marker'></i> Lokasi Kantor
                   <?= $kabupaten; ?>
                 </a>
-                <!--<a href="<?= site_url('identitas/maps/wilayah'); ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class='fa fa-map'></i> Peta Wilayah <?= $kabupaten; ?></a>-->
-                <a href="<?= site_url('identitas/maps/wilayah'); ?>" class="btn btn-social btn-box btn-primary btn-sm" title="Ubah Wilayah Desa"><i class='fa fa-google'></i> Peta Google </a>
-                <a href="<?= site_url('identitas/maps_openstreet/wilayah'); ?>" class="btn btn-social btn-box bg-blue btn-sm" title="Ubah Wilayah Desa"><i class='fa fa-map'></i> Peta Openstreet</a>
+                <!--<a href="<?= site_url('identitas/gmaps_wilayah'); ?>" class="btn btn-social btn-box btn-info btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"><i class='fa fa-map'></i> Peta Wilayah <?= $kabupaten; ?></a>-->
+                <a href="<?= site_url('identitas/gmaps_wilayah'); ?>" class="btn btn-social btn-box btn-primary btn-sm" title="Ubah Wilayah Desa"><i class='fa fa-google'></i> Peta Google </a>
+                <!--<a href="<?= site_url('identitas/maps_osm'); ?>" class="btn btn-social btn-box bg-blue btn-sm" title="Ubah Wilayah Desa"><i class='fa fa-map'></i> Peta Openstreet</a>-->
               <?php endif; ?>
             </div>
           </div>
@@ -64,69 +64,6 @@
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover tabel-rincian">
               <tbody>
-                <tr>
-                  <th colspan="3" style="background-color:#606BFD; color:#fff"><strong>
-                      <?= strtoupper($kabupaten); ?>
-                    </strong></th>
-                </tr>
-                <tr>
-                  <td width="300">Nama
-                    <?= $kabupaten; ?></td>
-                  <td width="1">:</td>
-                  <td><?= $main['nama_kabupaten']; ?></td>
-                </tr>
-                <tr>
-                  <td>Kode
-                    <?= $kabupaten; ?></td>
-                  <td>:</td>
-                  <td><?= kode_wilayah($main['kode_kabupaten']); ?></td>
-                </tr>
-                <tr>
-                  <td>Kode Pos</td>
-                  <td>:</td>
-                  <td><?= $main['kode_pos']; ?></td>
-                </tr>
-                <tr>
-                  <td>Nama Bupati</td>
-                  <td>:</td>
-                  <td><?= $main['nama_bupati']; ?></td>
-                </tr>
-                <tr>
-                  <td>NIP Bupati</td>
-                  <td>:</td>
-                  <td><?= $main['nip_bupati']; ?></td>
-                </tr>
-                <tr>
-                  <td>Nama Wakil Bupati</td>
-                  <td>:</td>
-                  <td><?= $main['nama_wakil_bupati']; ?></td>
-                </tr>
-                <tr>
-                  <td>NIP Wakil Bupati</td>
-                  <td>:</td>
-                  <td><?= $main['nip_wakil_bupati']; ?></td>
-                </tr>
-
-                <tr>
-                  <td>Alamat Kantor </td>
-                  <td>:</td>
-                  <td><?= $main['alamat_kantor']; ?></td>
-                </tr>
-                <tr>
-                  <td>E-Mail </td>
-                  <td>:</td>
-                  <td><?= $main['email_kabupaten']; ?></td>
-                </tr>
-                <tr>
-                  <td>Telpon </td>
-                  <td>:</td>
-                  <td><?= $main['telepon']; ?></td>
-                </tr>
-                <tr>
-                  <td>Website </td>
-                  <td>:</td>
-                  <td><?= $main['website']; ?></td>
-                </tr>
                 <tr>
                   <th colspan="3" style="background-color:#606BFD; color:#fff"><strong>
                       PROVINSI</strong></th>
@@ -140,6 +77,76 @@
                   <td>Kode Provinsi</td>
                   <td>:</td>
                   <td><?= kode_wilayah($main['kode_propinsi']); ?></td>
+                </tr>
+                <tr>
+                  <td>Nama Gubernur</td>
+                  <td>:</td>
+                  <td><?= $main['nama_gubernur']; ?></td>
+                </tr>
+                <tr>
+                  <td>Nama Wakil Gubernur</td>
+                  <td>:</td>
+                  <td><?= $main['nama_wagub']; ?></td>
+                </tr>
+                <tr>
+                  <th colspan="3" style="background-color:#606BFD; color:#fff"><strong>
+                      <?= strtoupper($kabupaten); ?>
+                    </strong></th>
+                </tr>
+                <tr>
+                  <td>Kode Kabupaten</td>
+                  <td>:</td>
+                  <td><?= $main['kode_kabupaten']; ?></td>
+                </tr>
+                <tr>
+                  <td>nama Kabupaten</td>
+                  <td>:</td>
+                  <td><?= $main['nama_kabupaten']; ?></td>
+                </tr>
+                <tr>
+                  <td width="300">Nama Bupati</td>
+                  <td width="1">:</td>
+                  <td><?= $main['nama_bupati']; ?></td>
+                </tr>
+                <tr>
+                  <td width="300">Nama Wakil Bupati</td>
+                  <td width="1">:</td>
+                  <td><?= $main['nama_wabup']; ?></td>
+                </tr>
+                <tr>
+                  <td>Kode Kecamatan</td>
+                  <td>:</td>
+                  <td><?= $main['kode_kecamatan']; ?></td>
+                </tr>
+                <tr>
+                  <td>Nama Kecamatan</td>
+                  <td>:</td>
+                  <td><?= $main['nama_kecamatan']; ?></td>
+                </tr>
+                <tr>
+                  <td>Kode Pos</td>
+                  <td>:</td>
+                  <td><?= $main['kode_pos']; ?></td>
+                </tr>
+                <tr>
+                  <td>Alamat Kantor </td>
+                  <td>:</td>
+                  <td><?= $main['alamat']; ?></td>
+                </tr>
+                <tr>
+                  <td>E-Mail </td>
+                  <td>:</td>
+                  <td><?= $main['email']; ?></td>
+                </tr>
+                <tr>
+                  <td>Telpon </td>
+                  <td>:</td>
+                  <td><?= $main['telepon']; ?></td>
+                </tr>
+                <tr>
+                  <td>Website </td>
+                  <td>:</td>
+                  <td><?= $main['website']; ?></td>
                 </tr>
                 <tr>
                   <th colspan="3" style="background-color:#606BFD; color:#fff"><strong>

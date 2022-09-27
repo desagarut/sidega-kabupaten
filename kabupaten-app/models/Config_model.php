@@ -53,16 +53,18 @@ class Config_model extends CI_Model {
 		$data['nama_desa'] = nama_terbatas($post['nama_desa']);
 		$data['kode_desa'] = bilangan($post['kode_desa']);
 		$data['kode_pos'] = bilangan($post['kode_pos']);
-		$data['nama_kepala_desa'] = nama($post['nama_kepala_desa']);
-		$data['nip_kepala_desa'] = nomor_surat_keputusan($post['nip_kepala_desa']);
-		$data['alamat_kantor'] = alamat($post['alamat_kantor']);
-		$data['email_desa'] = email($post['email_desa']);
+		$data['nama_gubernur'] = nama($post['nama_gubernur']);
+		$data['nama_wagub'] = nama($post['nama_wagub']);
+		$data['nama_bupati'] = nama($post['nama_bupati']);
+		$data['nama_wabup'] = nama($post['nama_wabup']);
+		$data['nama_camat'] = nama($post['nama_camat']);
+
+		$data['alamat'] = alamat($post['alamat']);
+		$data['email'] = email($post['email']);
 		$data['telepon'] = bilangan($post['telepon']);
 		$data['website'] = alamat_web($post['website']);
 		$data['nama_kecamatan'] = nama_terbatas($post['nama_kecamatan']);
 		$data['kode_kecamatan'] = bilangan($post['kode_kecamatan']);
-		$data['nama_kepala_camat'] = nama($post['nama_kepala_camat']);
-		$data['nip_kepala_camat'] = nomor_surat_keputusan($post['nip_kepala_camat']);
 		$data['nama_kabupaten'] = nama($post['nama_kabupaten']);
 		$data['kode_kabupaten'] = bilangan($post['kode_kabupaten']);
 		$data['nama_propinsi'] = nama_terbatas($post['nama_propinsi']);
@@ -75,8 +77,6 @@ class Config_model extends CI_Model {
 		$data['luas_wilayah'] = $post['luas_wilayah'];
 		$data['terluar_id'] = $post['terluar_id'];
 		$data['terluar_prov'] = $post['terluar_prov'];
-		$data['terluar_kab'] = $post['terluar_kab'];
-		$data['terluar_kec'] = $post['terluar_kec'];
 		$data['profil_singkat'] = $post['profil_singkat'];
 		$data['visi'] = $post['visi'];
 		$data['misi'] = $post['misi'];

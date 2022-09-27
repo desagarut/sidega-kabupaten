@@ -109,7 +109,7 @@
 					<tr>
 						<td width="25%">Alamat</td>
 						<td>:</td>
-						<td width="70%"><?=$kabupaten['alamat_kantor']?></td>
+						<td width="70%"><?=$kabupaten['alamat']?></td>
 					</tr>
 					<tr>
 						<td width="25%"><?=ucwords($this->setting->sebutan_desa)." "?></td>
@@ -139,7 +139,7 @@
 					<tr>
 						<td width="25%">Email</td>
 						<td>:</td>
-						<td width="70%"><?=$kabupaten['email_desa']?></td>
+						<td width="70%"><?=$kabupaten['email']?></td>
 					</tr>
 				</table>
 			</div>

@@ -4,7 +4,7 @@
 
 <script>
 
-var PetaDesa
+var PetaKabupaten
 var kantorDesa
 var batasWilayah
 
@@ -16,19 +16,19 @@ function initMap() {
         }
     <?php else: ?>
         var center = {
-            lat: -7.202686,
-            lng: 107.8866398,
+            lat: <?=$wil_atas['lat']?>,,
+            lng: <?=$wil_atas['lng']?>,
         }
     <?php endif; ?>
 
     var zoom = 14
-    //Jika posisi kantor desa belum ada, maka posisi peta akan menampilkan seluruh Indonesia
-    PetaDesa = new google.maps.Map(document.getElementById("peta_wilayah_desa"), { center, zoom:<?=$wil_ini['zoom']?>, mapTypeId:google.maps.MapTypeId.<?=$wil_ini['map_tipe']?> });
+    //Jika posisi kantor desa belum ada, maka posisi peta akan menampilkan seluruh Kabupaten
+    PetaKabupaten = new google.maps.Map(document.getElementById("peta_wilayah_kabupaten"), { center, zoom:<?=$wil_ini['zoom']?>, mapTypeId:google.maps.MapTypeId.<?=$wil_ini['map_tipe']?> });
 
     kantorDesa = new google.maps.Marker({
         position: center,
-        map: PetaDesa,
-        title: 'Kantor <?php echo ucwords($this->setting->sebutan_desa)." "?><?php echo ucwords($kabupaten['nama_desa'])?>'.true,
+        map: PetaKabupaten,
+        title: 'Kantor <?php echo ucwords($this->setting->sebutan_kabupaten)." "?><?php echo ucwords($kabupaten['nama_kabupaten'])?>'.true,
 		icon: '<?= gambar_kabupaten($main['logo']); ?>',
     });
 	
@@ -49,7 +49,7 @@ function initMap() {
 		fillOpacity: 0.25
 	});
 
-	batasWilayah.setMap(PetaDesa)
+	batasWilayah.setMap(PetaKabupaten)
     <?php endif; ?>
 }
 
@@ -57,6 +57,6 @@ function initMap() {
 
 <div class='row'>
   <div class="pad">
-    <div id="peta_wilayah_desa" style="height: 300px"></div>
+    <div id="peta_wilayah_kabupaten" style="height: 300px"></div>
   </div>
 </div>

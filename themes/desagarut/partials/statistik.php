@@ -75,8 +75,8 @@ $rt = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE kecam
                             <i class="fa fa-check text-white"></i>
                         </div>
                         <div class="ps-4">
-                            <h5 class="text-primary mb-0">RW</h5>
-                            <h1 class="mb-0" data-toggle="counter-up"><?= number_format($rw,0,'', '.')?></h1>
+                            <h5 class="text-primary mb-0">RTM</h5>
+                            <h1 class="mb-0" data-toggle="counter-up"><?= number_format($rtm,0,'', '.')?></h1>
                         </div>
                     </div>
                 </div>

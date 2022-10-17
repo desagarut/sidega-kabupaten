@@ -1,5 +1,0 @@
-*******************************
-Folder: kabupaten/upload/laporan
-*******************************
-
-Folder ini tempat menyimpan semua gambar yang diunggah sebagai dokumen lampiran.

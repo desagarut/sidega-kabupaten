@@ -3,7 +3,7 @@ $penduduk = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_penduduk WHER
 $keluarga = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_keluarga')->result_array()[0]['jumlah'];
 $rtm = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_rtm')->result_array()[0]['jumlah'];
 $id = $this->db->query('SELECT COUNT(id) AS jumlah FROM log_surat')->result_array()[0]['jumlah'];
-$kecamatan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE kecamatan <> "-" AND kecamatan <> "0" AND desa = 0 AND dusun = "0" AND rw = "0" AND rt = "0"')->result_array()[0]['jumlah'];
+$kecamatan = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE desa = 0 AND dusun = "0" AND rw = "0" AND rt = "0"')->result_array()[0]['jumlah'];
 $desa = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE kecamatan <> "-" AND kecamatan <> "0" AND desa <> "-" AND desa <> "0" AND dusun = "0" AND rw = "0" AND rt = "0"')->result_array()[0]['jumlah'];
 $dusun = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE kecamatan <> "-" AND kecamatan <> "0" AND desa <> "-" AND desa <> "0" AND dusun <> "-" AND dusun <> "0"  AND rw = "0" AND rt = "0"')->result_array()[0]['jumlah'];
 $rw = $this->db->query('SELECT COUNT(id) AS jumlah FROM tweb_wilayah WHERE kecamatan <> "-" AND kecamatan <> "0" AND desa <> "-" AND desa <> "0" AND dusun <> "-" AND dusun <> "0"  AND rw <> "-" AND rw <> "0" AND rt = "0"')->result_array()[0]['jumlah'];

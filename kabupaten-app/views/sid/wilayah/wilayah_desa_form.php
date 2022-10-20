@@ -25,17 +25,23 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label class="col-sm-3 control-label" for="kecamatan">Nama Kecamatan</label>
-													<div class="col-sm-7">
+													<label class="col-sm-3 control-label" for="kecamatan">Kecamatan</label>
+													<div class="col-sm-3">
+														<input id="kode_kecamatan" class="form-control input-sm" disabled maxlength="100" type="text" placeholder="Kode kecamatan" name="kode_kecamatan" value="<?= $kode_kecamatan ?>">
+													</div>
+													<div class="col-sm-4">
 														<input id="kecamatan" class="form-control input-sm nama_terbatas" disabled maxlength="100" type="text" placeholder="Nama kecamatan" name="kecamatan" value="<?= $kecamatan ?>">
 													</div>
 												</div>
 											</div>
-
 											<div class="col-sm-12">
 												<div class="form-group">
 													<label class="col-sm-3 control-label" for="desa">Nama Desa</label>
-													<div class="col-sm-7">
+													<div class="col-sm-3">
+														<input id="kode_desa" class="form-control input-sm nama_terbatas required" maxlength="100" type="text" placeholder="Kode Desa" name="kode_desa" value="<?= $kode_desa ?>">
+													</div>
+
+													<div class="col-sm-4">
 														<?php if ($id_desa) : ?>
 															<input type="hidden" name="id_desa" value="<?= $id_desa ?>">
 														<?php endif; ?>

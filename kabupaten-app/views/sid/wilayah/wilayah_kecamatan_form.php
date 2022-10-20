@@ -30,6 +30,15 @@
 													</div>
 												</div>
 											</div>
+											<div class="col-sm-12">
+												<div class="form-group">
+													<label class="col-sm-3 control-label" for="kode_kecamatan">Kode  <?= ucwords($this->setting->sebutan_kecamatan)?></label>
+													<div class="col-sm-7">
+														<input  id="kode_kecamatan" class="form-control input-sm nama_terbatas required" maxlength="100" type="text" placeholder="kode  <?= ucwords($this->setting->sebutan_kecamatan)?>" name="kode_kecamatan" value="<?= $kode_kecamatan?>">
+													</div>
+												</div>
+											</div>
+
 											<?php if ($kecamatan): ?>
 												<div class="col-sm-12">
 													<div class="form-group">

@@ -180,7 +180,9 @@ class Wilayah_model extends MY_Model {
 		if (empty((int)$data['id_kepala']))
 			unset($data['id_kepala']);
 		$data['kecamatan'] = nama_terbatas($data['kecamatan']) ?: 0;
+		$data['kode_kecamatan'] = bilangan($data['kode_kecamatan']) ?: 0;
 		$data['desa'] = nama_terbatas($data['desa']) ?: 0;
+		$data['kode_desa'] = bilangan($data['kode_desa']) ?: 0;
 		$data['dusun'] = nama_terbatas($data['dusun']) ?: 0;
 		$data['rw'] = bilangan($data['rw']) ?: 0;
 		$data['rt'] = bilangan($data['rt']) ?: 0;

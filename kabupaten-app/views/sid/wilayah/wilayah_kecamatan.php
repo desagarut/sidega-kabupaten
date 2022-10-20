@@ -54,6 +54,7 @@
 															<tr>
 																<th class="padat">No</th>
 																<th wlass="padat">Aksi</th>
+																<th wlass="padat">Kode</th>
 																<th width="25%">Nama <?= ucwords($this->setting->sebutan_kecamatan)?></th>
 																<th width="35%">Nama Camat</th>
 																<th class="text-center">Desa</th>
@@ -69,6 +70,7 @@
 														<tbody>
 															<?php
 																$total = array();
+																$total['total_desa'] = 0;
 																$total['total_desa'] = 0;
 																$total['total_dusun'] = 0;
 																$total['total_rw'] = 0;
@@ -91,6 +93,7 @@
                                                                     <a href="<?= site_url("sid_core/ajax_wilayah_kecamatan_openstreet_maps/$data[id]")?>" class="btn btn-info btn-box btn-sm" title="Peta Openstreet"><i class="fa fa-map-o"></i></a>
 																	<?php endif; ?>
 																</td>
+																<td><?= strtoupper($data['kode_kecamatan'])?></td>
 																<td><?= strtoupper($data['kecamatan'])?></td>
 																<td nowrap><strong><?= strtoupper($data['nama_camat'])?></strong> - <?= $data['nik_camat']?></td>
 																<td class="bilangan"><a href="<?= site_url("sid_core/sub_desa/$data[id]")?>" title="Rincian Wilayah Desa"><?= $data['jumlah_desa']?></a></td>
@@ -103,6 +106,7 @@
 																<td class="bilangan"><a href="<?= site_url("sid_core/warga_p/$data[id]")?>"><?= $data['jumlah_warga_p']?></a></td>
 															</tr>
 															<?php
+																$total['total_desa'] += $data['total_desa'];
 																$total['total_desa'] += $data['total_desa'];
 																$total['total_dusun'] += $data['total_dusun'];
 																$total['total_rw'] += $data['jumlah_rw'];
@@ -117,6 +121,7 @@
 														<tfoot>
 															<tr>
 																<th colspan="4"><label>TOTAL</label></th>
+																<th class="bilangan"><?= $total['total_desa']?></th>
 																<th class="bilangan"><?= $total['total_desa']?></th>
 																<th class="bilangan"><?= $total['total_dusun']?></th>
 																<th class="bilangan"><?= $total['total_rw']?></th>

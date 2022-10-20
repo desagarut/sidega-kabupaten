@@ -30,7 +30,7 @@
 <?php $this->load->view($folder_themes .'/partials/service') ?>
 <?php $this->load->view($folder_themes .'/partials/pricing') ?>
 <?php $this->load->view($folder_themes .'/partials/quote') ?>
-<?php $this->load->view($folder_themes .'/partials/testimoni') ?>
-<?php $this->load->view($folder_themes .'/partials/team') ?>
-<?php $this->load->view($folder_themes .'/partials/blog') ?>
+<?php // $this->load->view($folder_themes .'/partials/testimoni') ?>
+<?php $this->load->view($folder_themes .'/partials/aparatur') ?>
+<?php // $this->load->view($folder_themes .'/partials/blog') ?>
 <?php $this->load->view($folder_themes .'/partials/vendor') ?>

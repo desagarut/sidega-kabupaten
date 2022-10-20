@@ -39,17 +39,17 @@ class Pegawai extends Admin_Controller {
 		$data['paging'] = $this->pamong_model->paging($p);
 		$data['main'] = $this->pamong_model->list_data($data['paging']->offset, $data['paging']->per_page);
 		$data['keyword'] = $this->pamong_model->autocomplete();
-		$data['main_content'] = 'beranda/pengurus';
+		$data['main_content'] = 'beranda/pegawai';
 		$data['subtitle'] = "Buku Aparat Pemerintah Desa";
 		$data['selected_nav'] = 'aparat';
 		$this->set_minsidebar(1);
 		
-		//$this->render('beranda/pegawai', $data);
+		$this->render('beranda/pegawai', $data);
 
-		$this->load->view('header', $this->header);
-		$this->load->view('nav');
-		$this->load->view('bumindes/umum/main', $data);
-		$this->load->view('footer');
+		//$this->load->view('header', $this->header);
+		//$this->load->view('nav');
+		//$this->load->view('bumindes/umum/main', $data);
+		//$this->load->view('footer');
 	}
 
 	public function form($id = 0)
@@ -77,7 +77,7 @@ class Pegawai extends Admin_Controller {
 		else
 			$data['individu'] = NULL;
 
-		$this->render('home/pegawai_form', $data);
+		$this->render('beranda/pegawai_form', $data);
 	}
 
 	public function filter($filter)
@@ -160,7 +160,7 @@ class Pegawai extends Admin_Controller {
 		$data['kabupaten'] = $this->config_model->get_data();
 		$data['main'] = $this->pamong_model->list_data();
 
-		$this->load->view('home/'.$aksi, $data);
+		$this->load->view('beranda/'.$aksi, $data);
 	}
 
 	public function bagan($ada_bpd = '')
@@ -168,14 +168,14 @@ class Pegawai extends Admin_Controller {
 		$data['kabupaten'] = $this->config_model->get_data();
 		$data['bagan'] = $this->pamong_model->list_bagan();
 		$data['ada_bpd'] = ! empty($ada_bpd);
-		$this->render('home/bagan', $data);
+		$this->render('beranda/bagan', $data);
 	}
 
 	public function atur_bagan()
 	{
 		$data['atasan'] = $this->pamong_model->list_atasan();
 		$data['form_action'] = site_url("pegawai/update_bagan");
-		$this->load->view('home/ajax_atur_bagan', $data);
+		$this->load->view('beranda/ajax_atur_bagan', $data);
 	}
 
 	public function update_bagan()
@@ -191,6 +191,6 @@ class Pegawai extends Admin_Controller {
 		$data['list_setting'] = 'list_setting_bagan';
 		$this->setting_model->load_options();
 
-		$this->load->view('home/ajax_atur_bagan_layout', $data);
+		$this->load->view('beranda/ajax_atur_bagan_layout', $data);
 	}
 }

@@ -185,12 +185,12 @@ public function form_desa($id_kecamatan = '', $id_desa = '')
 		$temp = $this->wilayah_model->cluster_by_id($id_desa);
 		$data['desa'] = $temp['desa'];
 		$data['individu'] = $this->wilayah_model->get_penduduk($temp['id_kepala']);
-		$data['form_action'] = site_url("sid_core/update_desa/$id_kecamatan/$id_desa");
+		$data['form_action'] = site_url("sid_core/update_desa/$kecamatan/$id_desa");
 	}
 	else
 	{
 		$data['desa'] = NULL;
-		$data['form_action'] = site_url("sid_core/insert_desa/$id_kecamatan");
+		$data['form_action'] = site_url("sid_core/insert_desa/$kecamatan");
 	}
 
 	$this->render('sid/wilayah/wilayah_desa_form', $data);

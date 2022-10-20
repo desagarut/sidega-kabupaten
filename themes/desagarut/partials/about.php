@@ -7,9 +7,9 @@
                 <div class="col-lg-7">
                     <div class="section-title position-relative pb-3 mb-5">
                         <h5 class="fw-bold text-primary text-uppercase">Tentang kami</h5>
-                        <h1 class="mb-0">Solusi Layanan Pendampingan Desa dan Kelurahan</h1>
+                        <h1 class="mb-0">Solusi Percepatan Pembangunan Desa & Kelurahan</h1>
                     </div>
-                    <p class="mb-4">Adalah sebuah program jasa pendampingan dalam pengelolaan administrasi dan pelayanan khusus untuk desa dan kelurahan di Kabupaten Garut</p>
+                    <p class="mb-4">Adalah sebuah program pendampingan komprehensive bagi Desa & Kelurahan yang bertujuan untuk membantu mencapai kemandirian desa sesuai dengan tujuan SDGS</p>
                     <div class="row g-0 mb-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
                             <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Perencanaan</h5>
@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
                             <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Pelaporan</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Evaluasi & TIndak Lanjut</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Evaluasi & Tindak Lanjut</h5>
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="img/about.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="<?= base_url("$this->theme_folder/$this->theme/assets/img/tipe-desa-menurut-sdgs.png") ?>" style="object-fit: cover;">
                     </div>
                 </div>
             </div>

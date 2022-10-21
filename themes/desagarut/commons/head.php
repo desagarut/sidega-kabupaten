@@ -1,4 +1,3 @@
-<head>
     <meta charset="utf-8">
     <title><?= ucfirst($this->setting->website_title) ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -27,4 +26,4 @@
 
     <!-- Template Stylesheet -->
     <link href="<?= base_url("$this->theme_folder/$this->theme/assets/css/style.css") ?>" rel="stylesheet">
-</head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1823410826720847" crossorigin="anonymous"></script>

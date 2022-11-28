@@ -71,33 +71,6 @@ class First extends Web_Controller {
 		$this->load->library('upload');
 	}
 
-	// public function auth()
-	// {
-	// 	if ($_SESSION['mandiri_wait'] != 1)
-	// 	{
-	// 		$this->first_m->insidega();
-	// 	}
-	// 	if ($_SESSION['mandiri'] == 1)
-	// 	{
-	// 		redirect('mandiri_web/mandiri/1/1');
-	// 	}
-	// 	else
-	// 	{
-	// 		redirect();
-	// 	}
-	// }
-
-	// public function logout()
-	// {
-	// 	$this->first_m->logout();
-	// 	redirect();
-	// }
-
-	// public function ganti()
-	// {
-	// 	$this->first_m->ganti();
-	// 	redirect();
-	// }
 
 	public function index($p=1)
 	{
@@ -165,43 +138,6 @@ class First extends Web_Controller {
 		$this->load->view($this->template, $data);
 	}
 	
-	public function rss_info_mitra()
-	{
-		$data = $this->includes;
-
-		$this->set_template('layouts/rss_info_mitra.php');
-		
-		if ($this->setting->feed_kecamatan)
-		{
-			$data['feed1'] = array(
-				'items1' => $this->first_artikel_m->get_feed1(),
-				'title' => 'Kabar Kecamatan Cisompet',
-				'url' => 'https://www.kecamatancisompet.id'
-			);
-		}
-		
-		$this->_get_common_data($data);
-		$this->load->view($this->template, $data);
-	}
-	
-	public function rss_info_pendidikan()
-	{
-		$data = $this->includes;
-
-		$this->set_template('layouts/rss_info_pendidikan.php');
-		
-		if ($this->setting->feed_sthg)
-		{
-			$data['feed_sthg'] = array(
-				'items_sthg' => $this->first_artikel_m->get_feed_sthg(),
-				'title' => 'Info Sekolah Tinggi Hukum Garut',
-				'url' => 'https://www.sthgarut.ac.id'
-			);
-		}
-		
-		$this->_get_common_data($data);
-		$this->load->view($this->template, $data);
-	}
 
 	/*
 	| Artikel bisa ditampilkan menggunakan parameter pertama sebagai id, dan semua parameter lainnya dikosongkan. url artikel/:id

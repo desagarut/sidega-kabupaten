@@ -32,5 +32,5 @@
 <?php $this->load->view($folder_themes .'/partials/quote') ?>
 <?php // $this->load->view($folder_themes .'/partials/testimoni') ?>
 <?php $this->load->view($folder_themes .'/partials/aparatur') ?>
-<?php // $this->load->view($folder_themes .'/partials/blog') ?>
+<?php $this->load->view($folder_themes .'/partials/blog') ?>
 <?php $this->load->view($folder_themes .'/partials/vendor') ?>
